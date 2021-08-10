@@ -1,0 +1,64 @@
+.ss__wrapper {
+	display: flex;
+	.ss__sidebar {
+		margin-right: 40px;
+		flex: 0 0 240px;
+	}
+	.ss__content {
+
+	}
+}
+
+.ss__slideout {
+	.ss__facet {
+		margin: 0;
+	}
+	.ss__facet__header {
+		padding: 10px;
+		background-color: #e8e8e8;
+	}
+}
+.ss__slideout__button {
+	margin-top: 20px;
+}
+
+.ss__autocomplete-close {
+	position: absolute;
+	right: 8px;
+	top: 8px;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	background-color: #403b36;
+	svg {
+		fill: #fff;
+	}
+}
+
+.ss__autocomplete {
+	top: 40px;
+	right: 0px;
+	left: auto;
+	width: 900px;
+	&, & a {
+		color: #403b37;
+	}
+	.ss__facet-list-options__option {
+		text-align: left;
+		padding: 0;
+	}
+	@media (max-width: 991px) {
+		width: 600px;
+	}
+	@media (max-width: 768px) {
+		position: static;
+		width: auto;
+		max-height: none;
+		margin: 0;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+	}
+}
