@@ -28,13 +28,7 @@ export const theme = {
 												theme: {
 													components: {
 														checkbox: {
-															theme: {
-																components: {
-																	icon: {
-																		native: true,
-																	},
-																},
-															},
+															native: false,
 														},
 													},
 												},
