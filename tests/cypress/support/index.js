@@ -31,7 +31,7 @@ beforeEach(() => {
 	cy.intercept(/.*searchspring.net\/ajax_search\/js\/*/, (req) => { req.destroy() });
 
 	// prevent snap assets
-	cy.intercept(/.*ssnapui.searchspring.io\/.*.js$/, (req) => { req.destroy() });
+	cy.intercept(/.*snapui.searchspring.io\/.*.js$/, (req) => { req.destroy() });
 	// cy.intercept(/.*localhost:\d+\/.*.js$/, (req) => { req.destroy() });
 
 	// prevent 3rd party assets
