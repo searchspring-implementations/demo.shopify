@@ -17,8 +17,8 @@ export class Pagination extends Component {
 		return (
 			pagination.totalPages > 1 && (
 				<div class="text-center">
-					<ul class="pagination-custom">
-						<li>
+					<ul class="pagination-custom ss__pagination">
+						<li class="ss__pagination__prev">
 							{pagination.previous ? (
 								<a {...pagination.previous.url.link} title="« Previous">
 									←
@@ -29,7 +29,7 @@ export class Pagination extends Component {
 						</li>
 
 						{pages.map((page) => (
-							<li class={classnames({ active: page.active })}>
+							<li class={classnames('ss__pagination__page', { active: page.active, 'ss__pagination__active': page.active })}>
 								{page.active ? (
 									<span>{page.number}</span>
 								) : (
@@ -40,7 +40,7 @@ export class Pagination extends Component {
 							</li>
 						))}
 
-						<li>
+						<li class="ss__pagination__next">
 							{pagination.next ? (
 								<a {...pagination.next.url.link} title="Next »">
 									→

@@ -20,7 +20,7 @@ export class Results extends Component {
 		return (
 			<div class="grid-uniform grid-link__container">
 				{results.map((result) => (
-					<div key={result.id} class="grid__item wide--one-quarter large--one-third medium-down--one-half">
+					<div key={result.id} class="grid__item wide--one-third large--one-half medium--one-half small--one">
 						{{
 							banner: <InlineBanner banner={result} />,
 						}[result.type] || <Result result={result} />}

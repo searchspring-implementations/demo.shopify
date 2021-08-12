@@ -1,5 +1,9 @@
 export const theme = {
 	components: {
+		slider: {
+			trackColor: '#ccc',
+			railColor: '#333',
+		},
 		button: {
 			style: {
 				color: '#403b37',
@@ -14,37 +18,6 @@ export const theme = {
 			style: {
 				a: {
 					color: '#403b37',
-				},
-			},
-			theme: {
-				components: {
-					dropdown: {
-						theme: {
-							components: {
-								facet: {
-									theme: {
-										components: {
-											facetListOptions: {
-												theme: {
-													components: {
-														checkbox: {
-															theme: {
-																components: {
-																	icon: {
-																		native: true,
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
 				},
 			},
 		},

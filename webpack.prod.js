@@ -9,6 +9,8 @@ module.exports = merge(common, {
 		https: true,
 		port: 3333,
 		hot: false,
+		contentBase: [path.join(__dirname, 'public')],
+		contentBasePublicPath: ['/'],
 		publicPath: '/dist/',
 		disableHostCheck: true,
 		headers: {

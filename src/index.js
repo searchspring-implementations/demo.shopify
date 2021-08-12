@@ -16,16 +16,45 @@ import { Content } from './components/Content';
 import { Autocomplete } from './components/Autocomplete';
 
 /*
+	background filtering
+ */
+
+const script = document.getElementById('searchspring-context');
+const context = script ? getScriptContext(script, ['collection', 'tags', 'template', 'shopper']) : {};
+const backgroundFilters = [];
+
+if (context.collection?.handle) {
+	// set background filter
+	if (context.collection.handle != 'all') {
+		backgroundFilters.push({
+			field: 'collection_handle',
+			value: context.collection.handle,
+			type: 'value',
+			background: true,
+		});
+	}
+
+	// handle collection tags (filters)
+	if (context.tags) {
+		var collectionTags = context.tags.toLowerCase().replace(/-/g, '').replace(/ +/g, '').split('|');
+		collectionTags.forEach((tag) => {
+			backgroundFilters.push({
+				field: 'ss_tags',
+				value: tag,
+				type: 'value',
+				background: true,
+			});
+		});
+	}
+}
+
+/*
 	configuration and instantiation
  */
 
 configureMobx({
 	useProxies: 'never',
 });
-
-/*
-	configuration and instantiation
- */
 
 const config = {
 	parameters: {
@@ -42,6 +71,9 @@ const config = {
 				config: {
 					id: 'search',
 					plugin: middleware,
+					globals: {
+						filters: backgroundFilters,
+					},
 				},
 				targets: [
 					{
@@ -73,11 +105,7 @@ const config = {
 				},
 				targets: [
 					{
-						selector: '#shopify-section-header .header-bar .header-bar__right .header-bar__search-input',
-						component: Autocomplete,
-					},
-					{
-						selector: '#MobileNav .header-bar__search-input',
+						selector: '.header-bar__search-input',
 						component: Autocomplete,
 					},
 				],
@@ -89,6 +117,4 @@ const config = {
 const snap = new Snap(config);
 const { search, autocomplete } = snap.controllers;
 
-search.plugin((controller) => {
-	controller.store.custom.respondAt = '(max-width: 768px)';
-});
+search.store.custom.respondAt = '(max-width: 768px)';

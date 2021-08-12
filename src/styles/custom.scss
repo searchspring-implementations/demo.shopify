@@ -4,9 +4,6 @@
 		margin-right: 40px;
 		flex: 0 0 240px;
 	}
-	.ss__content {
-
-	}
 }
 
 .ss__slideout {
@@ -16,6 +13,9 @@
 	.ss__facet__header {
 		padding: 10px;
 		background-color: #e8e8e8;
+	}
+	.ss__facet__options {
+		margin-top: 0;
 	}
 }
 .ss__slideout__button {
@@ -60,5 +60,18 @@
 		margin: 0;
 		border-bottom-left-radius: 2px;
 		border-bottom-right-radius: 2px;
+	}
+}
+
+.ss__facet__options--slider {
+	padding: 7px;
+	.ss__slider__handle {
+		label {
+			color: #333;
+			top: -23px;
+		}
+	}
+	.ss__slider__segment {
+		border-radius: 4px;
 	}
 }
