@@ -48,7 +48,7 @@ class Result extends Component {
 			result && (
 				<div>
 					<div class={classnames({ 'on-sale': onSale })}>
-						<a href="/products/chain-bracelet" class="grid-link" onClick={intellisuggest}>
+						<a href={core.url} class="grid-link" onClick={intellisuggest}>
 							<span class="grid-link__image grid-link__image-loading grid-link__image-sold-out grid-link__image--product" data-image-wrapper>
 								{onSale && (
 									<span class="badge badge--sale">

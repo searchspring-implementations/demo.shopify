@@ -43,9 +43,10 @@ jobs:
       - name: Run Tests
         run: |
           npm run test
-          git add snapshot.png 
-          git commit -m "chore(publish)"
-          git push
+        ##  commit snapshot...
+        #   git add snapshot.png 
+        #   git commit -m "chore(publish)"
+        #   git push
 
       - name: Build bundle
         run: npm run build
