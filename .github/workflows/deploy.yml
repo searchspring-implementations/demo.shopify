@@ -10,6 +10,11 @@ jobs:
       - name: Checkout repositiory
         uses: actions/checkout@v2
 
+      - name: Set Github credentials
+        run: |
+          git config user.name searchspring-machine
+          git config user.email machine@searchspring.com
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -35,15 +40,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
 
-      - name: Build bundle
-        run: npm run build
-
       - name: Run Tests
         run: |
           npm run test
           git add snapshot.png 
-          git commit -m "docs(snapshot): generation"
+          git commit -m "chore(publish)"
           git push
+
+      - name: Build bundle
+        run: npm run build
 
       - name: Extract Variables
         id: variables
