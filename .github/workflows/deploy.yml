@@ -1,6 +1,6 @@
 on:
   push:
-    branches:    
+    branches:
       - '**' # matches every branch
 
 jobs:
@@ -39,7 +39,11 @@ jobs:
         run: npm run build
 
       - name: Run Tests
-        run: npm run test
+        run: |
+          npm run test
+          git add snapshot.png 
+          git commit -m "docs(snapshot): generation"
+          git push
 
       - name: Extract Variables
         id: variables
@@ -62,7 +66,11 @@ jobs:
       - name: Copy Files to S3
         run: |
           aws s3 sync --delete --acl public-read dist s3://${{secrets.SNAPFU_AWS_BUCKET}}/${{ steps.variables.outputs.siteId }}/${{ steps.variables.outputs.branch }}
+          aws s3 sync --delete --acl public-read public s3://${{secrets.SNAPFU_AWS_BUCKET}}/${{ steps.variables.outputs.siteId }}/${{ steps.variables.outputs.branch }}/public
 
       - name: Invalidate Cloudfront Cache
         run: |
           aws cloudfront create-invalidation --distribution-id ${{secrets.SNAPFU_AWS_DISTRIBUTION_ID}} --paths "/${{ steps.variables.outputs.siteId }}/${{ steps.variables.outputs.branch }}/*"
+        if: steps.variables.outputs.branch == 'production'
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{secrets.SNAPFU_AWS_DISTRIBUTION_ID}} --paths "/${{ steps.variables.outputs.siteId }}/bundle.js"

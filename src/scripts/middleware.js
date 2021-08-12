@@ -6,6 +6,7 @@ async function scrollToTop(search, next) {
 export const middleware = (controller) => {
 	// log the store
 	controller.on('afterStore', async ({ controller }, next) => {
+		controller.log.warn('Snap is Alive!');
 		controller.log.debug('store', controller.store.toJSON());
 		await next();
 	});
