@@ -7,7 +7,7 @@ const config = {
 			term: (num) => `.ss__autocomplete .ss__autocomplete__terms__option${num ? `:nth-child(${num})` : ``} a`,
 			facet: '.ss__autocomplete .ss__facet .ss__facet__options a',
 			result: '.ss__autocomplete .ss__results .ss__result a',
-			seeMore: '.ss__autocomplete .ss__autocomplete__content__results__info a',
+			seeMore: '.ss__autocomplete .ss__autocomplete__content__info a',
 		},
 	},
 	startingQuery: 't',
@@ -103,7 +103,7 @@ describe('Autocomplete', () => {
 					expect(facet.innerText).to.equal(store.facets[0].values[0].label);
 					cy.get(facet).trigger('focus');
 					cy.snapController('autocomplete').then(({ store }) => {
-						expect(totalResults).to.greaterThan(store.pagination.totalResults);
+						expect(totalResults).to.be.at.least(store.pagination.totalResults);
 					});
 				});
 			});

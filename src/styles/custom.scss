@@ -63,7 +63,7 @@
 	}
 }
 
-.ss__facet__options--slider {
+.ss__facet-slider {
 	padding: 7px;
 	.ss__slider__handle {
 		label {
@@ -73,5 +73,8 @@
 	}
 	.ss__slider__segment {
 		border-radius: 4px;
+	}
+	.ss__facet-slider__label {
+		display: inline-block;
 	}
 }
