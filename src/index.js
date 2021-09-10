@@ -57,8 +57,10 @@ configureMobx({
 });
 
 const config = {
-	parameters: {
-		query: { name: 'q' },
+	url: {
+		parameters: {
+			query: { name: 'q' },
+		},
 	},
 	client: {
 		globals: {
@@ -70,7 +72,7 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					plugin: middleware,
+					plugins: [[middleware]],
 					globals: {
 						filters: backgroundFilters,
 					},
