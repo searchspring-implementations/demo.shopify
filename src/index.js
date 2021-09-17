@@ -10,11 +10,6 @@ import { searchspring } from '../package.json';
 import { middleware } from './scripts/middleware';
 import './styles/custom.scss';
 
-import { SearchHeader } from './components/SearchHeader';
-import { SortBy } from './components/SortBy';
-import { Content } from './components/Content';
-import { Autocomplete } from './components/Autocomplete';
-
 /*
 	background filtering
  */
@@ -81,19 +76,25 @@ const config = {
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
-						component: () => SearchHeader,
+						component: async () => {
+							return (await import('./components/SearchHeader')).SearchHeader;
+						},
 						hideTarget: true,
 					},
 					{
 						name: 'sort',
 						selector: '#CollectionSection .section-header__link--right',
-						component: () => SortBy,
+						component: async () => {
+							return (await import('./components/SortBy')).SortBy;
+						},
 						hideTarget: true,
 					},
 					{
 						name: 'main',
 						selector: '#searchspring-content',
-						component: () => Content,
+						component: async () => {
+							return (await import('./components/Content')).Content;
+						},
 						hideTarget: true,
 					},
 				],
@@ -108,7 +109,9 @@ const config = {
 				targets: [
 					{
 						selector: '.header-bar__search-input',
-						component: () => Autocomplete,
+						component: async () => {
+							return (await import('./components/Autocomplete')).Autocomplete;
+						},
 					},
 				],
 			},
