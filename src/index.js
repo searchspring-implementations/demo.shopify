@@ -81,19 +81,19 @@ const config = {
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
-						component: SearchHeader,
+						component: () => SearchHeader,
 						hideTarget: true,
 					},
 					{
 						name: 'sort',
 						selector: '#CollectionSection .section-header__link--right',
-						component: SortBy,
+						component: () => SortBy,
 						hideTarget: true,
 					},
 					{
 						name: 'main',
 						selector: '#searchspring-content',
-						component: Content,
+						component: () => Content,
 						hideTarget: true,
 					},
 				],
@@ -108,7 +108,7 @@ const config = {
 				targets: [
 					{
 						selector: '.header-bar__search-input',
-						component: Autocomplete,
+						component: () => Autocomplete,
 					},
 				],
 			},

@@ -74,7 +74,7 @@ config?.pages?.forEach((page, _i) => {
 					cy.screenshot('snapshot', { capture: 'viewport' });
 					cy.visit(page.url);
 					cy.addLocalSnap(); // as @script	
-					cy.wait(5000)
+					cy.wait(5000);
 				} else {
 					this.skip();
 				}
