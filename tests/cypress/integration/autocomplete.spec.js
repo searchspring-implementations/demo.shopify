@@ -2,8 +2,10 @@ const config = {
 	url: 'https://localhost:3333/mockup.html',
 	disableGA: '',
 	selectors: {
-		autocomplete: {
+		website: {
 			input: '.header-bar__search-input:first',
+		},
+		autocomplete: {
 			term: (num) => `.ss__autocomplete .ss__autocomplete__terms__option${num ? `:nth-child(${num})` : ``} a`,
 			facet: '.ss__autocomplete .ss__facet .ss__facet__options a',
 			result: '.ss__autocomplete .ss__results .ss__result a',
@@ -34,9 +36,9 @@ describe('Autocomplete', () => {
 	describe('Tests Autocomplete', () => {
 		let term = config.startingQuery || null;
 		it('can make single letter query', function () {
-			if (!term && !config?.selectors?.autocomplete?.input) this.skip();
+			if (!term && !config?.selectors?.website?.input) this.skip();
 
-			cy.get(config.selectors.autocomplete.input).should('exist').type(term).wait(1000);
+			cy.get(config.selectors.website.input).should('exist').type(term).wait(1000);
 
 			cy.wait('@autocomplete').should('exist');
 
@@ -55,15 +57,15 @@ describe('Autocomplete', () => {
 		});
 
 		it('can clear input', function () {
-			if (!config?.selectors?.autocomplete?.input && !config?.startingQuery) this.skip();
+			if (!config?.selectors?.website?.input && !config?.startingQuery) this.skip();
 
-			cy.get(config.selectors.autocomplete.input).should('exist').should('have.value', config.startingQuery).clear().should('have.value', '');
+			cy.get(config.selectors.website.input).should('exist').should('have.value', config.startingQuery).clear().should('have.value', '');
 		});
 
 		it('can make term query', function () {
-			if (!config?.selectors?.autocomplete?.input) this.skip();
+			if (!config?.selectors?.website?.input) this.skip();
 
-			cy.get(config.selectors.autocomplete.input).should('exist').type(term).wait(1000);
+			cy.get(config.selectors.website.input).should('exist').type(term).wait(1000);
 
 			cy.wait('@autocomplete').should('exist');
 
@@ -93,7 +95,7 @@ describe('Autocomplete', () => {
 		it('can hover over facet', function () {
 			if (!config?.selectors?.input && !config?.selectors?.autocomplete?.facet) this.skip();
 
-			cy.get(config.selectors.autocomplete.input).should('exist').clear().type(term).wait(1000);
+			cy.get(config.selectors.website.input).should('exist').clear().type(term).wait(1000);
 			cy.snapController('autocomplete').then(({ store }) => {
 				const totalResults = store.pagination.totalResults;
 				if (!store.facets.length > 0 || !store.facets[0].values.length > 0) this.skip(); //skip if this term has no facets
