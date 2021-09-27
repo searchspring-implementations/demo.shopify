@@ -48,8 +48,11 @@ Cypress.Commands.add('addScripts', (scripts = []) => {
 });
 
 Cypress.Commands.add('addLocalSnap', () => {
-	cy.intercept(/.*localhost:\d+\/.*bundle.js/).as('script');
-	cy.addScript('https://localhost:3333/dist/bundle.js');
+	cy.window().then((window) => {
+		if(!window?.searchspring) {
+			cy.addScript('https://localhost:3333/dist/bundle.js');
+		}
+	});
 });
 
 Cypress.Commands.add('addCloudSnap', (branch = 'master') => {
@@ -79,20 +82,3 @@ Cypress.Commands.add('snapController', (controllerId = 'search') => {
 		});
 	});
 });
-
-function getByPath(obj, path) {
-	path = path.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-	path = path.replace(/^\./, ''); // strip a leading dot
-
-	const split = path.split('.');
-	for (let i = 0, n = split.length; i < n; ++i) {
-		const p = split[i];
-		if (p in obj) {
-			obj = obj[p];
-		} else {
-			return;
-		}
-	}
-
-	return obj;
-}
