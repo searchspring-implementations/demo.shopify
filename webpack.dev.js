@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const PreactRefreshPlugin = require('@prefresh/webpack');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -32,10 +31,7 @@ module.exports = merge(common, {
 			writeToDisk: (filePath) => {
 				return /bundle\.js.*/.test(filePath);
 			},
-		}
+		},
 	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
-		new PreactRefreshPlugin(),
-	]
+	plugins: [new PreactRefreshPlugin()],
 });

@@ -259,7 +259,52 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
+<<<<<<< Updated upstream
 			it('can select a facet list option', function () {
+=======
+			it('can select a slider option', function () {
+				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle)
+					this.skip();
+
+				cy.snapController().then(({ store }) => {
+					// find first display='slider' facet
+					const sliderFacet = store.facets.filter((facet) => facet.display === 'slider')[0];
+					if (!sliderFacet) this.skip();
+
+					let facetSliderElement;
+					cy.get(`${config.selectors.sidebar.facetWrapper}`).each((facet) => {
+						// find matching facet in dom
+						const title = facet.find(config.selectors.sidebar.facetTitle);
+						if (!facetSliderElement && sliderFacet.label.trim() === title.text().trim()) {
+							facetSliderElement = facet;
+							if (sliderFacet.collapsed) {
+								// toggle visibility if collapsed
+								sliderFacet.toggleCollapse();
+							}
+						}
+					})
+					.then(() => {
+						// use left arrow to change slider values
+						const leftHandle = cy.get(facetSliderElement.find('.ss__facet-slider__handles button')[0]);
+						if (leftHandle) {
+							leftHandle.should('have.attr', 'aria-valuenow', sliderFacet.active.low)
+							.should('have.attr', 'aria-valuemin', sliderFacet.active.low)
+							.should('have.attr', 'aria-valuemax', sliderFacet.active.high)
+							.type('{rightarrow}', { force: true })
+
+							cy.snapController().then(({ store }) => {
+								cy.get(facetSliderElement.find('.ss__facet-slider__handles button')[0])
+									.should('have.attr', 'aria-valuenow', sliderFacet.active.low + sliderFacet.step)
+									.should('have.attr', 'aria-valuemin', sliderFacet.active.low)
+									.should('have.attr', 'aria-valuemax', sliderFacet.active.high);
+							});
+						}
+					});
+				});
+			});
+
+			it.skip('can select a list option', function () {
+>>>>>>> Stashed changes
 				if (
 					!config?.selectors?.sidebar?.facetWrapper &&
 					!config?.selectors?.sidebar?.facetTitle &&

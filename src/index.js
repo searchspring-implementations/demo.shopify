@@ -72,7 +72,7 @@ const config = {
 						filters: backgroundFilters,
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
@@ -106,7 +106,7 @@ const config = {
 					id: 'autocomplete',
 					selector: '.header-bar__search-input',
 				},
-				targets: [
+				targeters: [
 					{
 						selector: '.header-bar__search-input',
 						component: async () => {
@@ -120,6 +120,7 @@ const config = {
 };
 
 const snap = new Snap(config);
-const { search, autocomplete } = snap.controllers;
 
-search.store.custom.respondAt = '(max-width: 768px)';
+snap.getController('search').then((search) => {
+	search.store.custom.respondAt = '(max-width: 768px)';
+});
