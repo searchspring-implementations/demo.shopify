@@ -95,7 +95,7 @@ const config = {
 						component: async () => {
 							return (await import('./components/Content')).Content;
 						},
-						prefetch: context.collection || context.searchPage,
+						prefetch: Boolean(context.collection || context.searchPage),
 						hideTarget: true,
 					},
 				],
