@@ -259,9 +259,6 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
-<<<<<<< Updated upstream
-			it('can select a facet list option', function () {
-=======
 			it('can select a slider option', function () {
 				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle)
 					this.skip();
@@ -304,7 +301,6 @@ config?.pages?.forEach((page, _i) => {
 			});
 
 			it.skip('can select a list option', function () {
->>>>>>> Stashed changes
 				if (
 					!config?.selectors?.sidebar?.facetWrapper &&
 					!config?.selectors?.sidebar?.facetTitle &&
