@@ -40,7 +40,14 @@ jobs:
 
       - name: Run Tests
         run: npm run test
-
+      
+      - name: Lighthouse Tests
+        run: |
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
+          pwd
+          ls -la
+        
       - name: Extract Variables
         id: variables
         shell: bash
