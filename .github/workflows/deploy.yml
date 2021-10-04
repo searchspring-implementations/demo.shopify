@@ -2,7 +2,10 @@ on:
   push:
     branches:
       - '**' # matches every branch
-
+  pull_request:
+    branches:
+      - '**'
+    
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -47,6 +50,8 @@ jobs:
           lhci autorun
           pwd
           ls -la
+        env: 
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         
       - name: Extract Variables
         id: variables
