@@ -77,7 +77,7 @@ const config = {
 						filters: backgroundFilters,
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
@@ -105,7 +105,7 @@ const config = {
 					id: 'autocomplete',
 					selector: '.header-bar__search-input',
 				},
-				targets: [
+				targeters: [
 					{
 						selector: '.header-bar__search-input',
 						component: () => Autocomplete,

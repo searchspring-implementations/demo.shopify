@@ -334,7 +334,7 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
-			it('can select a list option', function () {
+			it.skip('can select a list option', function () {
 				if (
 					!config?.selectors?.sidebar?.facetWrapper ||
 					!config?.selectors?.sidebar?.facetTitle ||
