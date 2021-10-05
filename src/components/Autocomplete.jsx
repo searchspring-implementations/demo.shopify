@@ -9,7 +9,7 @@ export class Autocomplete extends Component {
 	render() {
 		const { controller, input } = this.props;
 
-		const responsive = {
+		const breakpoints = {
 			0: {
 				columns: 2,
 				rows: 1,
@@ -22,16 +22,10 @@ export class Autocomplete extends Component {
 
 		const theme = {
 			components: {
-				results: {
-					theme: {
-						components: {
-							result: {
-								hidePricing: true,
-								hideTitle: true,
-								detailSlot: <ResultDetails />,
-							},
-						},
-					},
+				result: {
+					hidePricing: true,
+					hideTitle: true,
+					detailSlot: <ResultDetails />,
 				},
 			},
 		};
@@ -53,7 +47,7 @@ export class Autocomplete extends Component {
 						<Icon icon="close-thin" size="8px" />
 					</span>
 				)}
-				<LibraryAutocomplete input={input} controller={controller} responsive={responsive} theme={theme} />
+				<LibraryAutocomplete input={input} controller={controller} breakpoints={breakpoints} theme={theme} />
 			</>
 		);
 	}
