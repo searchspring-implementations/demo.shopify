@@ -13,6 +13,17 @@ export class Autocomplete extends Component {
 			0: {
 				columns: 2,
 				rows: 1,
+				hideFacets: true,
+				vertical: true,
+			},
+			540: {
+				columns: 3,
+				rows: 1,
+				vertical: true,
+			},
+			768: {
+				columns: 2,
+				rows: 2,
 			},
 			991: {
 				columns: 3,
