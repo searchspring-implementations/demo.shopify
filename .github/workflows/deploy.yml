@@ -15,8 +15,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: searchspring/snap-publish
-          ref: main
-          token: ${{ secrets.PACKAGE_TOKEN }}
+          token: ${{ secrets.ACTION_PAT }}
       - name: Run @searchspring/snap-publish action
         uses: ./
         with:
