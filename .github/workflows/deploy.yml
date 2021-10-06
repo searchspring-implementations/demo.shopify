@@ -1,10 +1,4 @@
-on:
-  push:
-    branches:
-      - '**' # matches every branch
-  pull_request:
-    branches:
-      - '**'
+on: [push, pull_request]
     
 jobs:
   Publish:
@@ -30,3 +24,4 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
           skipTests: false
           aws-region: us-east-2
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
