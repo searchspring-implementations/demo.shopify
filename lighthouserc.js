@@ -5,7 +5,8 @@ module.exports = {
         url: ['http://localhost:3333/mockup.html'],
       },
       upload: {
-        target: 'filesystem',
+        // target: 'filesystem',
+        target: 'temporary-public-storage',
         outputDir: 'lighthouse'
       },
     },
