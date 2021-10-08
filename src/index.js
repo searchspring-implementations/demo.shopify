@@ -7,7 +7,7 @@ import { getScriptContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
 import { searchspring } from '../package.json';
-import { middleware } from './scripts/middleware';
+import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
 /*
@@ -67,12 +67,12 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[middleware]],
+					plugins: [[searchPlugin]],
 					globals: {
 						filters: backgroundFilters,
 					},
 				},
-				targets: [
+				targeters: [
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
@@ -106,7 +106,7 @@ const config = {
 					id: 'autocomplete',
 					selector: '.header-bar__search-input',
 				},
-				targets: [
+				targeters: [
 					{
 						selector: '.header-bar__search-input',
 						component: async () => {
@@ -120,6 +120,3 @@ const config = {
 };
 
 const snap = new Snap(config);
-const { search, autocomplete } = snap.controllers;
-
-search.store.custom.respondAt = '(max-width: 768px)';
