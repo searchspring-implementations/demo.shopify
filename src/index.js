@@ -7,7 +7,7 @@ import { getScriptContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
 import { searchspring } from '../package.json';
-import { middleware } from './scripts/middleware';
+import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
 /*
@@ -67,7 +67,7 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[middleware]],
+					plugins: [[searchPlugin]],
 					globals: {
 						filters: backgroundFilters,
 					},
@@ -120,7 +120,3 @@ const config = {
 };
 
 const snap = new Snap(config);
-
-snap.getController('search').then((search) => {
-	search.store.custom.respondAt = '(max-width: 768px)';
-});
