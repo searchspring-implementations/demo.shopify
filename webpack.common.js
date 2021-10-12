@@ -9,10 +9,14 @@ module.exports = {
 		modulesSort: 'size',
 		modulesSpace: 70,
 	},
-	plugins:[
+	plugins: [
 		new webpack.DefinePlugin({
 			BRANCHNAME: `"${branchName}"`,
-		})
+		}),
+		// code splitting chunks
+		new webpack.optimize.LimitChunkCountPlugin({
+			maxChunks: 1,
+		}),
 	],
 	module: {
 		rules: [
