@@ -8,6 +8,12 @@ module.exports = {
             target: 'filesystem',
             outputDir: 'lighthouse'
         },
+        assert: {
+            "assertions": {
+                "categories:accessibility": ["warn", { "minScore": 0.9 }],
+                "categories:performance": ["error", { "minScore": 0.52 }],
+              }
+        }
     },
 };
 
