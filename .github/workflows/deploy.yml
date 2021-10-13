@@ -3,14 +3,14 @@ on: [push, pull_request]
 jobs:
   Publish:
     runs-on: ubuntu-latest
-    name: Snap Publish
+    name: Snap Action
     steps:
       - name: checkout action
         uses: actions/checkout@v2
         with:
-          repository: searchspring/snap-publish
+          repository: searchspring/snap-action
           token: ${{ secrets.ACTION_PAT }}
-      - name: Run @searchspring/snap-publish action
+      - name: Run @searchspring/snap-action
         uses: ./
         with:
         # required
@@ -22,6 +22,4 @@ jobs:
           aws-s3-bucket-name: ${{secrets.SNAPFU_AWS_BUCKET}}
         # optional
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-          skipTests: false
-          aws-region: us-east-2
           GITHUB_BOT_TOKEN: ${{ secrets.MACHINE_TOKEN }}
