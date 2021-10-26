@@ -67,21 +67,3 @@ export class Content extends Component {
 		);
 	}
 }
-
-const SlideoutButton = () => {
-	return <button>Filters</button>;
-};
-
-const SlideoutContent = (props) => {
-	const { toggleActive, active } = props;
-
-	return (
-		active && (
-			<>
-				{/* slideout content here */}
-				<FilterSummary />
-				<Facets />
-			</>
-		)
-	);
-};
