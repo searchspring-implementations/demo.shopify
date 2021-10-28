@@ -22,7 +22,7 @@ export class Content extends Component {
 			controller.store.loaded && (
 				<ThemeProvider theme={theme}>
 					<ControllerProvider controller={controller}>
-						<div class="ss__wrapper">
+						<div class="ss__wrapper test">
 							{!isMobile && facets.length > 0 && (
 								<div class="ss__sidebar">
 									<FilterSummary
