@@ -34,11 +34,6 @@ const es5 = merge(common, {
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
-		static: {
-			directory: path.join(__dirname, 'public'),
-			publicPath: ['/'],
-			watch: false,
-		},
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
