@@ -1,6 +1,3 @@
-import { h, Fragment, render } from 'preact';
-import { configure as configureMobx } from 'mobx';
-
 /* searchspring imports */
 import { Snap } from '@searchspring/snap-preact';
 import { getScriptContext } from '@searchspring/snap-toolbox';
@@ -9,11 +6,6 @@ import { getScriptContext } from '@searchspring/snap-toolbox';
 import { searchspring } from '../package.json';
 import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
-
-import { SearchHeader } from './components/SearchHeader';
-import { SortBy } from './components/SortBy';
-import { Content } from './components/Content';
-import { Autocomplete } from './components/Autocomplete';
 
 /*
 	background filtering
@@ -52,10 +44,6 @@ if (context.collection?.handle) {
 	configuration and instantiation
  */
 
-configureMobx({
-	useProxies: 'never',
-});
-
 const config = {
 	url: {
 		parameters: {
@@ -81,19 +69,19 @@ const config = {
 					{
 						name: 'title',
 						selector: '.ss-shop .section-header__title',
-						component: () => SearchHeader,
+						component: async () => (await import('./components/SearchHeader')).SearchHeader,
 						hideTarget: true,
 					},
 					{
 						name: 'sort',
 						selector: '#CollectionSection .section-header__link--right',
-						component: () => SortBy,
+						component: async () => (await import('./components/SortBy')).SortBy,
 						hideTarget: true,
 					},
 					{
 						name: 'main',
 						selector: '#searchspring-content',
-						component: () => Content,
+						component: async () => (await import('./components/Content')).Content,
 						hideTarget: true,
 					},
 				],
@@ -108,7 +96,7 @@ const config = {
 				targeters: [
 					{
 						selector: '.header-bar__search-input',
-						component: () => Autocomplete,
+						component: async () => (await import('./components/Autocomplete')).Autocomplete,
 					},
 				],
 			},

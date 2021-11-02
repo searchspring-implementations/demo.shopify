@@ -1,26 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
-const childProcess = require("child_process");
-const branchName = childProcess.execSync("git rev-parse --abbrev-ref HEAD").toString().trim();
+const childProcess = require('child_process');
+const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
 module.exports = {
-	entry: './src/index.js',
 	stats: {
 		modulesSort: 'size',
 		modulesSpace: 70,
 	},
-	plugins:[
+	plugins: [
 		new webpack.DefinePlugin({
 			BRANCHNAME: `"${branchName}"`,
-		})
+		}),
+		// to disable code splitting, include the following:
+		// new webpack.optimize.LimitChunkCountPlugin({
+		// 	maxChunks: 1,
+		// }),
 	],
 	module: {
 		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: ['babel-loader'],
-			},
 			{
 				test: /\.(css|scss)$/,
 				exclude: /\.module\.(css|scss)$/,
@@ -47,17 +45,12 @@ module.exports = {
 			},
 		],
 	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[id].js',
-	},
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		alias: {
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat'
+			'react-dom': 'preact/compat',
 		},
-	}
+	},
 };
