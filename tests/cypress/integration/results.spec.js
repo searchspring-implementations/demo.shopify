@@ -1,6 +1,6 @@
 const config = {
 	pages: [
-		{ url: 'https://localhost:3333/mockup.html', id: 'Search' },
+		{ url: 'https://localhost:3333/index.html', id: 'Search' },
 		// { url: 'https://try.searchspring.com/dresses', id: 'Category' },
 	],
 	disableGA: '',

@@ -1,5 +1,5 @@
 const config = {
-	url: 'https://localhost:3333/mockup.html',
+	url: 'https://localhost:3333/index.html',
 	disableGA: '',
 	selectors: {
 		website: {

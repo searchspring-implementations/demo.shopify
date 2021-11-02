@@ -11,7 +11,7 @@
 		"dev": "kill $(lsof -ti:3333,8888); webpack serve --config webpack.dev.js",
 		"format": "prettier --write \"**/*.{js,ts,json}\"",
 		"lint": "eslint --fix \"./src/**/*.{js,ts}\"",
-		"test": "kill $(lsof -ti:3333,8888); webpack serve --config webpack.prod.js & (cypress run --project tests && kill $(lsof -ti:3333,8888))",
+		"test": "kill $(lsof -ti:3333,8888); webpack serve --config webpack.prod.modern.js & (cypress run --project tests && kill $(lsof -ti:3333,8888))",
 		"lighthouse": "lhci autorun",
 		"prepare": "husky install"
 	},

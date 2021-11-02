@@ -6,8 +6,10 @@ const es6 = merge(common, {
 	mode: 'production',
 	entry: './src/index.js',
 	output: {
+		path: path.join(__dirname, 'dist'),
 		filename: 'modern.bundle.js',
 		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
+		publicPath: '/dist/',
 	},
 	target: 'web',
 	module: {
