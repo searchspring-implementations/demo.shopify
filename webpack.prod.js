@@ -9,7 +9,6 @@ const es5 = merge(common, {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
 		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
 	},
 	target: 'browserslist',
 	module: {
