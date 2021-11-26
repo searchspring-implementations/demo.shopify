@@ -6,18 +6,24 @@ const es5 = merge(common, {
 	mode: 'development',
 	entry: './src/universal.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
+		filename: 'universal.bundle.js',
+		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'universal'
+							}]
+						],
+					},
+				},
 			},
 		],
 	},
@@ -49,22 +55,28 @@ const es5 = merge(common, {
 const modern = merge(common, {
 	mode: 'development',
 	entry: './src/index.js',
+	output: {
+		filename: 'bundle.js',
+		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+	},
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'modern'
+							}]
+						],
+					},
+				},
 			},
 		],
 	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
-	},
-	target: 'web',
 	devtool: 'source-map',
 });
 
