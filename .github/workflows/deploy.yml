@@ -17,8 +17,8 @@ jobs:
           secretKey: ${{ secrets.WEBSITE_SECRET_KEY }}
           aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.SNAPFU_AWS_SECRET_ACCESS_KEY }}
-          aws-cloudfront-distribution-id: ${{secrets.SNAPFU_AWS_DISTRIBUTION_ID}}
-          aws-s3-bucket-name: ${{secrets.SNAPFU_AWS_BUCKET}}
+          aws-cloudfront-distribution-id: ${{secrets.DISTRIBUTION_TEST}}
+          aws-s3-bucket-name: ${{secrets.BUCKET_TEST}}
         # optional
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
           GITHUB_BOT_TOKEN: ${{ secrets.MACHINE_TOKEN }}
