@@ -70,9 +70,8 @@
 			"eslint --fix"
 		]
 	},
-	"browserslist": [
-		"last 1 version",
-		"not dead",
-		"ie >= 11"
-	]
+	"browserslist": {
+		"universal": "extends @searchspring/browserslist-config-snap/universal",
+		"modern": "extends @searchspring/browserslist-config-snap/modern"
+	}
 }

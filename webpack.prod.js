@@ -4,13 +4,11 @@ const path = require('path');
 
 const es5 = merge(common, {
 	mode: 'production',
-	entry: './src/bundle.js',
+	entry: './src/index.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
 		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
 	module: {
 		rules: [
 			{
@@ -19,7 +17,11 @@ const es5 = merge(common, {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'],
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'modern'
+							}]
+						],
 					},
 				},
 			},

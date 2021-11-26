@@ -4,7 +4,7 @@ const path = require('path');
 
 const es5 = merge(common, {
 	mode: 'development',
-	entry: './src/bundle.js',
+	entry: './src/universal.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',

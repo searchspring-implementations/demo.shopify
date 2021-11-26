@@ -8,14 +8,11 @@ const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toSt
 
 const modern = merge(common, {
 	mode: 'production',
-	entry: './src/index.js',
+	entry: './src/universal.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
-		publicPath: `https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branchName}/`,
+		filename: 'universal.bundle.js',
+		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
-	target: 'web',
 	module: {
 		rules: [
 			{
@@ -24,7 +21,11 @@ const modern = merge(common, {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'],
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'universal'
+							}]
+						],
 					},
 				},
 			},
