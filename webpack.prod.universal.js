@@ -1,18 +1,15 @@
-const path = require('path');
-const childProcess = require('child_process');
-
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
-const packageJSON = require('./package.json');
-const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+const path = require('path');
 
-const modern = merge(common, {
+module.exports = merge(common, {
 	mode: 'production',
 	entry: './src/universal.js',
 	output: {
 		filename: 'universal.bundle.js',
 		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
@@ -23,7 +20,7 @@ const modern = merge(common, {
 					options: {
 						presets: [
 							['@babel/preset-env', {
-								browserslistEnv: 'universal'
+								browserslistEnv: 'universal',
 							}]
 						],
 					},
@@ -33,17 +30,20 @@ const modern = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		https: false,
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
+		static: {
+			directory: path.join(__dirname, 'public'),
+			publicPath: ['/'],
+			watch: false,
+		},
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
 	},
 });
-
-module.exports = modern;

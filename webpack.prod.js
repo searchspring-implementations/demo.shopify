@@ -2,13 +2,14 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 
-const es5 = merge(common, {
+module.exports = merge(common, {
 	mode: 'production',
 	entry: './src/index.js',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
 	},
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
@@ -19,7 +20,7 @@ const es5 = merge(common, {
 					options: {
 						presets: [
 							['@babel/preset-env', {
-								browserslistEnv: 'modern'
+								browserslistEnv: 'modern',
 							}]
 						],
 					},
@@ -36,10 +37,13 @@ const es5 = merge(common, {
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
+		static: {
+			directory: path.join(__dirname, 'public'),
+			publicPath: ['/'],
+			watch: false,
+		},
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
 	},
 });
-
-module.exports = es5;

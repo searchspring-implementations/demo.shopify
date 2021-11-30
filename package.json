@@ -39,6 +39,7 @@
 		"@babel/preset-react": "^7.14.5",
 		"@babel/runtime": "^7.15.4",
 		"@lhci/cli": "^0.8.2",
+		"@searchspring/browserslist-config-snap": "^1.0.4",
 		"@searchspring/prettier": "^1.0.2",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.2.2",
@@ -71,21 +72,7 @@
 		]
 	},
 	"browserslist": {
-		"universal": [
-			"defaults",
-			"ie >= 11"
-		],
-		"modern": [
-			"Chrome >= 91",
-			"ChromeAndroid 91",
-			"Edge >= 91",
-			"Firefox >= 74",
-			"FirefoxAndroid >= 74",
-			"Safari >= 13.1",
-			"ios_saf 13.4",
-			"iOS >= 13.4",
-			"Opera >= 77",
-			"Android >= 91"
-		]
+		"universal": "extends @searchspring/browserslist-config-snap/universal",
+		"modern": "extends @searchspring/browserslist-config-snap/modern"
 	}
 }

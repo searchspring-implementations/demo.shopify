@@ -2,13 +2,14 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 
-const es5 = merge(common, {
-	mode: 'development',
+const universal = merge(common, {
+	mode: 'production',
 	entry: './src/universal.js',
 	output: {
 		filename: 'universal.bundle.js',
 		chunkFilename: 'snap.universal.chunk.[fullhash:8].[id].js',
 	},
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
@@ -32,12 +33,6 @@ const es5 = merge(common, {
 		port: 3333,
 		hot: true,
 		allowedHosts: 'all',
-		client: {
-			overlay: {
-				errors: true,
-				warnings: false,
-			},
-		},
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
@@ -53,12 +48,14 @@ const es5 = merge(common, {
 });
 
 const modern = merge(common, {
-	mode: 'development',
+	mode: 'production',
 	entry: './src/index.js',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		publicPath: '/dist/',
 	},
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
@@ -69,7 +66,7 @@ const modern = merge(common, {
 					options: {
 						presets: [
 							['@babel/preset-env', {
-								browserslistEnv: 'modern'
+								browserslistEnv: 'modern',
 							}]
 						],
 					},
@@ -80,4 +77,4 @@ const modern = merge(common, {
 	devtool: 'source-map',
 });
 
-module.exports = [es5, modern];
+module.exports = [universal, modern];
