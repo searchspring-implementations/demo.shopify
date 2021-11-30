@@ -3,7 +3,7 @@ const common = require('./webpack.common.js');
 const path = require('path');
 
 const universal = merge(common, {
-	mode: 'production',
+	mode: 'development',
 	entry: './src/universal.js',
 	output: {
 		filename: 'universal.bundle.js',
@@ -44,16 +44,21 @@ const universal = merge(common, {
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
+		client: {
+			overlay: {
+				errors: true,
+				warnings: false,
+			},
+		},
 	},
 });
 
 const modern = merge(common, {
-	mode: 'production',
+	mode: 'development',
 	entry: './src/index.js',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
 	},
 	target: 'browserslist:modern',
 	module: {

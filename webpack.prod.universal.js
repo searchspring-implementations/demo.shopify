@@ -30,7 +30,7 @@ module.exports = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: false,
+		https: true,
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',
