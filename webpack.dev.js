@@ -28,6 +28,7 @@ const universal = merge(common, {
 			},
 		],
 	},
+	devtool: 'source-map',
 	devServer: {
 		https: true,
 		port: 3333,

@@ -12,7 +12,7 @@
 		"format": "prettier --write \"**/*.{js,ts,json}\"",
 		"lint": "eslint --fix \"./src/**/*.{js,ts}\"",
 		"test": "kill $(lsof -ti:3333,8888); webpack serve --config webpack.dev.js & (cypress run --project tests && kill $(lsof -ti:3333,8888))",
-		"lighthouse": "lhci autorun",
+		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun",
 		"prepare": "husky install"
 	},
 	"author": "kevin",
@@ -54,6 +54,7 @@
 		"lint-staged": "^11.1.2",
 		"node-sass": "^6.0.1",
 		"prettier": "^2.4.0",
+		"puppeteer": "^12.0.1",
 		"sass-loader": "^12.1.0",
 		"style-loader": "^3.2.1",
 		"webpack": "^5.52.1",
