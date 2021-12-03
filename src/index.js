@@ -3,7 +3,6 @@ import { Snap } from '@searchspring/snap-preact';
 import { getContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
-import { searchspring } from '../package.json';
 import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
@@ -51,7 +50,7 @@ const config = {
 	},
 	client: {
 		globals: {
-			siteId: searchspring.siteId,
+			siteId: 'y56s6x',
 		},
 	},
 	controllers: {

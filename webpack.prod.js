@@ -7,14 +7,17 @@ module.exports = merge(common, {
 	entry: './src/universal.js',
 	output: {
 		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
 	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				include: [/node_modules\/@searchspring/, /src/],
+				include: [
+					/node_modules\/@searchspring/,
+					path.resolve(__dirname, 'src'),
+				],
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -30,7 +33,7 @@ module.exports = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',

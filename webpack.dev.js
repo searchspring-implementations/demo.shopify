@@ -7,14 +7,17 @@ const universal = merge(common, {
 	entry: './src/universal.js',
 	output: {
 		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
 	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
- 				include: [/node_modules\/@searchspring/, /src/],
+				include: [
+					/node_modules\/@searchspring/,
+					path.resolve(__dirname, 'src'),
+				],
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -30,7 +33,7 @@ const universal = merge(common, {
 	},
 	devtool: 'source-map',
 	devServer: {
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: true,
 		allowedHosts: 'all',
@@ -60,7 +63,7 @@ const modern = merge(common, {
 	entry: './src/index.js',
 	output: {
 		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'modern.bundle.chunk.[fullhash:8].[id].js',
 	},
 	target: 'browserslist:modern',
 	module: {

@@ -7,7 +7,7 @@ module.exports = merge(common, {
 	entry: './src/index.js',
 	output: {
 		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'modern.bundle.chunk.[fullhash:8].[id].js',
 	},
 	target: 'browserslist:modern',
 	module: {
@@ -29,7 +29,7 @@ module.exports = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',
