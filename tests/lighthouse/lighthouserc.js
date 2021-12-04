@@ -1,4 +1,8 @@
-// configuration for lighthouse testing
+/*
+	lhci
+	configuration for lighthouse testing
+	https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md
+ */
 
 module.exports = {
 	ci: {
