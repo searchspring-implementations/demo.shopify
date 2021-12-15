@@ -82,3 +82,20 @@ Cypress.Commands.add('snapController', (controllerId = 'search') => {
 		});
 	});
 });
+
+Cypress.Commands.add('waitForIdle', (options) => {
+	options = { initialTimeout: 2000, additionalTimeout: 200, ...options };
+
+	return cy.window().then({ timeout: options.initialTimeout }, (window) => {
+		return new Cypress.Promise((resolve) => {
+			let timeout = setTimeout(resolve, options.additionalTimeout)
+
+			const observer = new window.PerformanceObserver(() => {
+				clearTimeout(timeout);
+				timeout = setTimeout(resolve, options.additionalTimeout);
+			});
+
+			observer.observe({ entryTypes: ['resource'] });
+		});
+	});
+});
