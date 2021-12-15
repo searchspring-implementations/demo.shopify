@@ -18,7 +18,8 @@
 	"author": "kevin",
 	"searchspring": {
 		"siteId": "y56s6x",
-		"framework": "preact"
+		"framework": "preact",
+		"tags": []
 	},
 	"license": "MIT",
 	"prettier": "@searchspring/prettier",
