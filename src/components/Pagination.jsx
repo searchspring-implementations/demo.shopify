@@ -29,7 +29,7 @@ export class Pagination extends Component {
 						</li>
 
 						{pages.map((page) => (
-							<li class={classnames('ss__pagination__page', { active: page.active, 'ss__pagination__active': page.active })}>
+							<li class={classnames('ss__pagination__page', { active: page.active, ss__pagination__active: page.active })}>
 								{page.active ? (
 									<span>{page.number}</span>
 								) : (
