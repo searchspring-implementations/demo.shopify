@@ -34,10 +34,10 @@ describe('Autocomplete', () => {
 		it('can make single letter query', function () {
 			if (!term && !config?.selectors?.website?.input) this.skip();
 
-			if(config.selectors.website.openInputButton) {
-				cy.get(config.selectors.website.openInputButton).first().click({ force: true }).wait(1000)
+			if (config.selectors.website.openInputButton) {
+				cy.get(config.selectors.website.openInputButton).first().click({ force: true }).wait(1000);
 			}
-			
+
 			cy.get(config.selectors.website.input).first().should('exist').focus().type(term).wait(1000);
 
 			cy.wait('@autocomplete').should('exist');
@@ -129,9 +129,7 @@ describe('Autocomplete', () => {
 			if (!config?.selectors?.autocomplete?.seeMore) this.skip();
 
 			cy.snapController('autocomplete').then((controller) => {
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${controller.urlManager.href}"]`)
-					.should('exist')
-					.click({force: true});
+				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${controller.urlManager.href}"]`).should('exist').click({ force: true });
 				cy.on('url:changed', (newUrl) => {
 					expect(newUrl).to.contain(controller.urlManager.href);
 				});
