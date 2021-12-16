@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import config from '../../../package.json';
+import packageJSON from '../../../package.json';
 
 
 Cypress.Commands.add('addScript', (script) => {
@@ -50,14 +50,14 @@ Cypress.Commands.add('addScripts', (scripts = []) => {
 Cypress.Commands.add('addLocalSnap', () => {
 	cy.window().then((window) => {
 		if(!window?.searchspring) {
-			cy.addScript('https://localhost:3333/dist/bundle.js');
+			cy.addScript('https://localhost:3333/bundle.js');
 		}
 	});
 });
 
-Cypress.Commands.add('addCloudSnap', (branch = 'master') => {
+Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 	cy.intercept(/.*snapui.searchspring.io\/.*\/bundle.js$/).as('script');
-	cy.addScript(`https://snapui.searchspring.io/${config.searchspring.siteId}/${branch}/bundle.js`);
+	cy.addScript(`https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branch}/bundle.js`);
 });
 
 Cypress.Commands.add('snapController', (controllerId = 'search') => {
