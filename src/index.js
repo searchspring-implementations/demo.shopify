@@ -1,9 +1,8 @@
 /* searchspring imports */
 import { Snap } from '@searchspring/snap-preact';
-import { getScriptContext } from '@searchspring/snap-toolbox';
+import { getContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
-import { searchspring } from '../package.json';
 import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
@@ -11,8 +10,7 @@ import './styles/custom.scss';
 	background filtering
  */
 
-const script = document.getElementById('searchspring-context');
-const context = script ? getScriptContext(script, ['collection', 'tags', 'template', 'shopper']) : {};
+const context = getContext(['collection', 'tags', 'template', 'shopper']);
 const backgroundFilters = [];
 
 if (context.collection?.handle) {
@@ -52,7 +50,7 @@ const config = {
 	},
 	client: {
 		globals: {
-			siteId: searchspring.siteId,
+			siteId: 'y56s6x',
 		},
 	},
 	controllers: {

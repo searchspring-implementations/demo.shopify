@@ -2,36 +2,41 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 
-const es5 = merge(common, {
+const universal = merge(common, {
 	mode: 'development',
-	entry: './src/bundle.js',
+	entry: './src/universal.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
-				use: ['babel-loader'],
+				include: [
+					/node_modules\/@searchspring/,
+					path.resolve(__dirname, 'src'),
+				],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'universal'
+							}]
+						],
+					},
+				},
 			},
 		],
 	},
+	devtool: 'source-map',
 	devServer: {
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: true,
 		allowedHosts: 'all',
-		client: {
-			overlay: {
-				errors: true,
-				warnings: false,
-			},
-		},
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
@@ -41,31 +46,45 @@ const es5 = merge(common, {
 			watch: true,
 		},
 		devMiddleware: {
-			publicPath: '/dist/',
+			publicPath: '/',
+		},
+		client: {
+			overlay: {
+				errors: true,
+				warnings: false,
+			},
 		},
 	},
+	devtool: 'source-map',
 });
 
 const modern = merge(common, {
 	mode: 'development',
 	entry: './src/index.js',
+	output: {
+		filename: 'modern.bundle.js',
+		chunkFilename: 'modern.bundle.chunk.[fullhash:8].[id].js',
+	},
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: ['babel-loader'],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'modern',
+							}]
+						],
+					},
+				},
 			},
 		],
 	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
-		publicPath: '/dist/',
-	},
-	target: 'web',
 	devtool: 'source-map',
 });
 
-module.exports = [es5, modern];
+module.exports = [universal, modern];

@@ -2,24 +2,30 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 
-const es5 = merge(common, {
+module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/bundle.js',
+	entry: './src/universal.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
-		chunkFilename: 'snap.chunk.[fullhash:8].[id].js',
+		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
 	},
-	target: 'browserslist',
+	target: 'browserslist:universal',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
+				include: [
+					/node_modules\/@searchspring/,
+					path.resolve(__dirname, 'src'),
+				],
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'],
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'universal',
+							}]
+						],
 					},
 				},
 			},
@@ -27,17 +33,20 @@ const es5 = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
+		static: {
+			directory: path.join(__dirname, 'public'),
+			publicPath: ['/'],
+			watch: false,
+		},
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
 	},
 });
-
-module.exports = es5;

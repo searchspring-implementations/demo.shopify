@@ -1,30 +1,27 @@
-const path = require('path');
-const childProcess = require('child_process');
-
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
-const packageJSON = require('./package.json');
-const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+const path = require('path');
 
-const modern = merge(common, {
+module.exports = merge(common, {
 	mode: 'production',
 	entry: './src/index.js',
 	output: {
-		path: path.join(__dirname, 'dist'),
 		filename: 'modern.bundle.js',
-		chunkFilename: 'snap.modern.chunk.[fullhash:8].[id].js',
-		publicPath: `https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branchName}/`,
+		chunkFilename: 'modern.bundle.chunk.[fullhash:8].[id].js',
 	},
-	target: 'web',
+	target: 'browserslist:modern',
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@babel/preset-env'],
+						presets: [
+							['@babel/preset-env', {
+								browserslistEnv: 'modern',
+							}]
+						],
 					},
 				},
 			},
@@ -32,17 +29,20 @@ const modern = merge(common, {
 	},
 	devServer: {
 		client: false,
-		https: true,
+		server: 'https',
 		port: 3333,
 		hot: false,
 		allowedHosts: 'all',
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 		},
+		static: {
+			directory: path.join(__dirname, 'public'),
+			publicPath: ['/'],
+			watch: false,
+		},
 		devMiddleware: {
 			publicPath: '/dist/',
 		},
 	},
 });
-
-module.exports = modern;

@@ -534,7 +534,7 @@ config?.pages?.forEach((page, _i) => {
 			describe('Snapshot', () => {
 				it('saves a screenshot', function () {
 					cy.visit(page.url);
-					cy.snapController().then(({ store }) => {
+					cy.waitForIdle().then(() => {
 						cy.screenshot('snapshot', { capture: 'viewport' });
 					});
 				});
