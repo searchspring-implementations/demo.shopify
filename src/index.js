@@ -45,7 +45,9 @@ if (context.collection?.handle) {
 const config = {
 	url: {
 		parameters: {
-			query: { name: 'q' },
+			core: {
+				query: { name: 'q' },
+			},
 		},
 	},
 	client: {
