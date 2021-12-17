@@ -35,10 +35,10 @@ describe('Autocomplete', () => {
 			if (!term && !config?.selectors?.website?.input) this.skip();
 
 			if (config.selectors.website.openInputButton) {
-				cy.get(config.selectors.website.openInputButton).first().click({ force: true }).wait(1000);
+				cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 			}
 
-			cy.get(config.selectors.website.input).first().should('exist').focus().type(term).wait(1000);
+			cy.get(config.selectors.website.input).first().should('exist').focus().type(term);
 
 			cy.wait('@autocomplete').should('exist');
 
@@ -65,7 +65,7 @@ describe('Autocomplete', () => {
 		it('can make term query', function () {
 			if (!config?.selectors?.website?.input) this.skip();
 
-			cy.get(config.selectors.website.input).first().should('exist').type(term).wait(1000);
+			cy.get(config.selectors.website.input).first().should('exist').type(term);
 
 			cy.wait('@autocomplete').should('exist');
 
@@ -96,7 +96,10 @@ describe('Autocomplete', () => {
 		it('can hover over facet', function () {
 			if (!config?.selectors?.input && !config?.selectors?.autocomplete?.facet) this.skip();
 
-			cy.get(config.selectors.website.input).first().should('exist').clear().type(term).wait(1000);
+			cy.get(config.selectors.website.input).first().should('exist').clear().type(term);
+
+			cy.wait('@autocomplete').should('exist');
+
 			cy.snapController('autocomplete').then(({ store }) => {
 				const totalResults = store.pagination.totalResults;
 				if (!store.facets.length > 0 || !store.facets[0].values.length > 0) this.skip(); //skip if this term has no facets
