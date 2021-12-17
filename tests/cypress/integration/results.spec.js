@@ -310,6 +310,37 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
+			it('can select a list option', function () {
+				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle || !config?.selectors?.sidebar?.facetOption)
+					this.skip();
+
+				cy.snapController().then(({ store }) => {
+					// find first display='list' facet
+					const listFacet = store.facets.filter((facet) => facet.display === 'list')[0];
+					if (!listFacet) this.skip();
+
+					cy.get(`${config.selectors.sidebar.facetWrapper}`).each((facet) => {
+						// find matching facet in dom
+						const title = facet.find(config.selectors.sidebar.facetTitle);
+						if (listFacet.label.trim() === title.text().trim()) {
+							if (listFacet.collapsed) {
+								// toggle visibility if collapsed
+								listFacet.toggleCollapse();
+							}
+
+							// click on an option in facet and ensure urlManager contains new state
+							const facetListOption = facet.find(config.selectors.sidebar.facetOption)[0];
+							const clickedHref = facetListOption.getAttribute('href');
+							cy.get(facetListOption).click({ force: true });
+							cy.snapController().then(({ store }) => {
+								expect(Object.keys(store.services.urlManager.state.filter)).to.contain(listFacet.field);
+								expect(clickedHref).to.equal(store.services.urlManager.href);
+							});
+						}
+					});
+				});
+			});
+
 			it('can select a slider option', function () {
 				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle) this.skip();
 
@@ -348,42 +379,6 @@ config?.pages?.forEach((page, _i) => {
 										.should('have.attr', 'aria-valuemax', sliderFacet.active.high);
 								});
 							}
-						});
-				});
-			});
-
-			it.skip('can select a list option', function () {
-				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle || !config?.selectors?.sidebar?.facetOption)
-					this.skip();
-
-				cy.snapController().then(({ store }) => {
-					// find first display='list' facet
-					const listFacet = store.facets.filter((facet) => facet.display === 'list')[0];
-					if (!listFacet) this.skip();
-
-					let facetListElement;
-					cy.get(`${config.selectors.sidebar.facetWrapper}`)
-						.each((facet) => {
-							// find matching facet in dom
-							const title = facet.find(config.selectors.sidebar.facetTitle);
-							if (!facetListElement && listFacet.label.trim() === title.text().trim()) {
-								facetListElement = facet;
-								if (listFacet.collapsed) {
-									// toggle visibility if collapsed
-									listFacet.toggleCollapse();
-								}
-							}
-						})
-						.then(() => {
-							// click on an option in facet and ensure urlManager contains new state
-							const facetListOption = facetListElement.find(config.selectors.sidebar.facetOption)[0];
-							const clickedValue = facetListOption.innerText;
-							cy.get(facetListOption).click({ force: true });
-							cy.snapController().then(({ store }) => {
-								expect(Object.keys(store.services.urlManager.state.filter)).to.contain(listFacet.field);
-								const value = store.services.urlManager.state.filter[listFacet.field][0];
-								expect(clickedValue).to.contain(value);
-							});
 						});
 				});
 			});
