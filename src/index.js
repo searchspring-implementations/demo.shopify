@@ -7,7 +7,7 @@ import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
 /*
-	background filtering
+	context and background filtering
  */
 
 const context = getContext(['collection', 'tags', 'template', 'shopper']);
@@ -43,9 +43,12 @@ if (context.collection?.handle) {
  */
 
 const config = {
+	context,
 	url: {
 		parameters: {
-			query: { name: 'q' },
+			core: {
+				query: { name: 'q' },
+			},
 		},
 	},
 	client: {
