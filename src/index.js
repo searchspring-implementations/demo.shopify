@@ -43,6 +43,7 @@ if (context.collection?.handle) {
  */
 
 const config = {
+	context,
 	url: {
 		parameters: {
 			core: {
