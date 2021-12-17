@@ -7,7 +7,7 @@ import { searchPlugin } from './scripts/searchPlugin';
 import './styles/custom.scss';
 
 /*
-	background filtering
+	context and background filtering
  */
 
 const context = getContext(['collection', 'tags', 'template', 'shopper']);
