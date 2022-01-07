@@ -41,12 +41,15 @@ config?.pages?.forEach((page, _i) => {
 
 				cy.addLocalSnap();
 
+				cy.waitForBundle().then(() => {
+					cy.window().then(window => {
+						expect(window.searchspring).to.exist;
+					});
+				});
+
 				if (config.disableGA) {
 					window[`ga-disable-${config.disableGA}`] = true;
 				}
-
-				cy.wait('@meta').should('exist');
-				cy.wait('@search').should('exist');
 
 				cy.snapController().then(({ store }) => {
 					expect(typeof store).to.equal('object');
@@ -76,7 +79,7 @@ config?.pages?.forEach((page, _i) => {
 							if (href) {
 								cy.get('@next').click({ force: true });
 							} else {
-								cy.get('@next').find('a').click({ force: true });
+								cy.get('@next').find('a, button').click({ force: true });
 							}
 						});
 				} else if (config?.selectors?.pagination?.page) {
@@ -89,7 +92,7 @@ config?.pages?.forEach((page, _i) => {
 							if (href) {
 								cy.get('@page2').click({ force: true });
 							} else {
-								cy.get('@page2').find('a').click({ force: true });
+								cy.get('@page2').find('a, button').click({ force: true });
 							}
 						});
 				}
@@ -112,7 +115,7 @@ config?.pages?.forEach((page, _i) => {
 							if (href) {
 								cy.get('@prev').click({ force: true });
 							} else {
-								cy.get('@prev').find('a').click({ force: true });
+								cy.get('@prev').find('a, button').click({ force: true });
 							}
 						});
 				} else if (config?.selectors?.pagination?.page) {
@@ -125,7 +128,7 @@ config?.pages?.forEach((page, _i) => {
 							if (href) {
 								cy.get('@page1').click({ force: true });
 							} else {
-								cy.get('@page1').find('a').click({ force: true });
+								cy.get('@page1').find('a, button').click({ force: true });
 							}
 						});
 				}
@@ -148,7 +151,7 @@ config?.pages?.forEach((page, _i) => {
 						if (href) {
 							cy.get('@page3').click({ force: true });
 						} else {
-							cy.get('@page3').find('a').click({ force: true });
+							cy.get('@page3').find('a, button').click({ force: true });
 						}
 					});
 
@@ -199,7 +202,7 @@ config?.pages?.forEach((page, _i) => {
 
 			it('can toggle facet collapsed', function () {
 				if (
-					!config?.selectors?.sidebar?.facetWrapper &&
+					!config?.selectors?.sidebar?.facetWrapper ||
 					!config?.selectors?.sidebar?.facetCollapseButton &&
 					(!config?.selectors?.sidebar?.facetOpen || !config?.selectors?.sidebar?.facetCollapsed)
 				)
@@ -540,10 +543,18 @@ config?.pages?.forEach((page, _i) => {
 		if (_i === 0) {
 			// only take screenshot once
 			describe('Snapshot', () => {
-				it('saves a screenshot', function () {
+				it('saves a screenshot', () => {
 					cy.visit(page.url);
-					cy.waitForIdle().then(() => {
-						cy.screenshot('snapshot', { capture: 'viewport' });
+					cy.addLocalSnap();
+					
+					cy.waitForBundle().then(() => {
+						cy.snapController('search').then(({ store }) => {
+							expect(store.results.length).to.greaterThan(0);
+			
+							cy.waitForIdle().then(() => {
+								cy.screenshot('snapshot', { capture: 'viewport' });
+							});
+						});
 					});
 				});
 			});
