@@ -27,12 +27,11 @@
 import packageJSON from '../../../package.json';
 
 Cypress.Commands.add('addScript', (script) => {
-	cy.get('head').then(($elem) => {
+	cy.document().then((doc) => {
 		const scriptElem = document.createElement('script');
 		scriptElem.type = 'text/javascript';
 		scriptElem.src = script;
-
-		$elem.append(scriptElem);
+		doc.head.appendChild(scriptElem);
 	});
 });
 
@@ -78,6 +77,20 @@ Cypress.Commands.add('snapController', (controllerId = 'search') => {
 			} else {
 				reject(`no controller found with id: ${controllerId}`);
 			}
+		});
+	});
+});
+
+Cypress.Commands.add('waitForBundle', () => {
+	cy.window().then((window) => {
+		return new Cypress.Promise((resolve) => {
+			const checkTimeout = 100;
+			let interval = setInterval(() => {
+				if (window.searchspring) {
+					clearInterval(interval);
+					resolve();
+				}
+			}, checkTimeout);
 		});
 	});
 });
