@@ -409,7 +409,7 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
-			it('can select a grid option', function () {
+			it.skip('can select a grid option', function () {
 				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle || !config?.selectors?.sidebar?.facetOption)
 					this.skip();
 
@@ -445,7 +445,7 @@ config?.pages?.forEach((page, _i) => {
 				});
 			});
 
-			it('can select a palette option', function () {
+			it.skip('can select a palette option', function () {
 				if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle || !config?.selectors?.sidebar?.facetOption)
 					this.skip();
 
