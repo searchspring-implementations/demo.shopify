@@ -108,6 +108,8 @@ const config = {
 const snap = new Snap(config);
 
 console.log('...this is production...');
+console.log('Branch name:', BRANCHNAME);
+console.log('Alt Branch name:', ALTBRANCHNAME);
 snap.getController('search').then((controller) => {
 	controller.log.debug('we have the controller on production:', controller);
 });
