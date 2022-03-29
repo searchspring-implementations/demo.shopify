@@ -46,7 +46,7 @@ export class Content extends Component {
 												<span class="ss__search-header__count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>
 											)}
 											<span class="ss__search-header__count-total">{pagination.totalResults}</span>
-											{` result${pagination.totalResults == 1 ? '' : 's'}`}
+											{` result${pagination.totalResults == 1 ? '' : 's'}`}!
 										</h5>
 
 										<Results results={store.results}></Results>
