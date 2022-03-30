@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: searchspring/snap-action
-          ref: syntax-issues
+          # ref: syntax-issues
       - name: Run @searchspring/snap-action
         uses: ./
         with:
