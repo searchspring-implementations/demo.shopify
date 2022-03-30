@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-const branchNameAlternative = childProcess.execSync('git branch --show-current').toString().trim();
 
 module.exports = {
 	stats: {
@@ -11,7 +10,6 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			BRANCHNAME: `"${branchName}"`,
-			ALTBRANCHNAME: `"${branchNameAlternative}"`,
 		}),
 		// to disable code splitting, include the following:
 		// new webpack.optimize.LimitChunkCountPlugin({
