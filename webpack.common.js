@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-const branchNameAlternative = childProcess.execSync('git name-rev --name-only HEAD').toString().trim();
+const branchNameAlternative = childProcess.execSync('git branch --show-current').toString().trim();
 
 module.exports = {
 	stats: {
