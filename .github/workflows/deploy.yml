@@ -8,7 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: searchspring/snap-action@syntax-issues
+          repository: searchspring/snap-action
+          ref: syntax-issues
       - name: Run @searchspring/snap-action
         uses: ./
         with:
