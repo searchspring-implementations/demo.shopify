@@ -180,7 +180,8 @@ config?.pages?.forEach((page, _i) => {
 						cy.snapController().then(({ store }) => {
 							const activeOption = store.sorting.options[optionIndexToSelect];
 							expect(activeOption.active).to.equal(true);
-							expect(store.sorting.current).to.equal(activeOption);
+							expect(store.sorting.current.field).to.equal(activeOption.field);
+							expect(store.sorting.current.direction).to.equal(activeOption.direction);
 						});
 					});
 			});
@@ -190,13 +191,15 @@ config?.pages?.forEach((page, _i) => {
 			it('has correct titles', function () {
 				if (!config?.selectors?.sidebar?.facetTitle) this.skip();
 
+				if (config?.selectors?.sidebar?.facetToggle) {
+					cy.get(config?.selectors?.sidebar?.facetToggle).click({ force: true });
+				}
+
 				cy.snapController().then(({ store }) => {
-					cy.get(config.selectors.sidebar.facetTitle)
-						.should('have.length', store.facets.length)
-						.each((el, index) => {
-							const title = el.text().trim();
-							expect(title).to.equal(store.facets[index].label.trim());
-						});
+					cy.get(config.selectors.sidebar.facetWrapper).each((el, index) => {
+						const title = el.find(config.selectors.sidebar.facetTitle);
+						expect(title.text().trim()).to.equal(store.facets[index].label.trim());
+					});
 				});
 			});
 
@@ -437,6 +440,9 @@ config?.pages?.forEach((page, _i) => {
 							const clickedValue = facetGridOption.innerText;
 							cy.get(facetGridOption).click({ force: true });
 							cy.snapController().then(({ store }) => {
+								const facetGridOption = facetGridElement.find(config.selectors.sidebar.facetOption)[0];
+								const clickedValue = facetGridOption.innerText;
+
 								expect(Object.keys(store.services.urlManager.state.filter)).to.contain(gridFacet.field);
 								const value = store.services.urlManager.state.filter[gridFacet.field][0];
 								expect(clickedValue).to.contain(value);
@@ -470,9 +476,11 @@ config?.pages?.forEach((page, _i) => {
 						.then(() => {
 							// click on an option in facet and ensure urlManager contains new state
 							const facetPaletteOption = facetPaletteElement.find(config.selectors.sidebar.facetOption)[0];
-							const clickedValue = facetPaletteOption.innerText;
 							cy.get(facetPaletteOption).click({ force: true });
 							cy.snapController().then(({ store }) => {
+								const facetPaletteOption = facetPaletteElement.find(config.selectors.sidebar.facetOption)[0];
+								const clickedValue = facetPaletteOption.innerText;
+
 								expect(Object.keys(store.services.urlManager.state.filter)).to.contain(paletteFacet.field);
 								const value = store.services.urlManager.state.filter[paletteFacet.field][0];
 								expect(clickedValue).to.contain(value);
@@ -523,7 +531,7 @@ config?.pages?.forEach((page, _i) => {
 				cy.snapController().then(({ store }) => {
 					if (store.filters.length === 0) this.skip();
 				});
-				cy.get(config?.selectors?.sidebar?.removeAllFacetsButton).should('exist').click({ force: true });
+				cy.get(config?.selectors?.sidebar?.removeAllFacetsButton).first().should('exist').click({ force: true });
 				cy.snapController().then(({ store }) => {
 					expect(store.filters.length).to.equal(0);
 				});
@@ -548,7 +556,7 @@ config?.pages?.forEach((page, _i) => {
 					cy.addLocalSnap();
 					
 					cy.waitForBundle().then(() => {
-						cy.snapController('search').then(({ store }) => {
+						cy.snapController().then(({ store }) => {
 							expect(store.results.length).to.greaterThan(0);
 			
 							cy.waitForIdle().then(() => {

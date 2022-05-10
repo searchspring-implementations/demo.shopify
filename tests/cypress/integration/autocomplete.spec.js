@@ -17,21 +17,29 @@ const config = {
 
 describe('Autocomplete', () => {
 	describe('Setup', () => {
+		it('has valid config', () => {
+			cy.wrap(config).its('url').should('have.length.at.least', 1);
+			cy.wrap(config).its('startingQuery').should('have.length.at.least', 1);
+			cy.wrap(config).its('selectors.website.input').should('have.length.at.least', 1);
+		});
+
 		it('adds snap bundle to autocomplete page', () => {
 			cy.visit(config.url);
-			cy.addLocalSnap(); // as @script
+			cy.addLocalSnap();
+
+			cy.waitForBundle().then(() => {
+				cy.window().then((window) => {
+					expect(window.searchspring).to.exist;
+				});
+			});
 
 			if (config.disableGA) {
 				window[`ga-disable-${config.disableGA}`] = true;
 			}
-
-			cy.wait('@meta').should('exist');
 		});
 	});
 
 	describe('Tests Autocomplete', () => {
-		let term = config.startingQuery || null;
-
 		it('has a controller with an empty store', function () {
 			cy.snapController('autocomplete').then(({ store }) => {
 				expect(store.results.length).to.equal(0);
@@ -41,85 +49,83 @@ describe('Autocomplete', () => {
 		});
 
 		it('can make single letter query', function () {
-			if (!term && !config?.selectors?.website?.input) this.skip();
+			if (!config.startingQuery || !config?.selectors?.website?.input) this.skip();
 
 			if (config.selectors.website.openInputButton) {
 				cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 			}
 
-			cy.get(config.selectors.website.input).first().should('exist').focus().type(term);
+			cy.get(config.selectors.website.input).first().should('exist').focus().type(config.startingQuery, { force: true });
 
 			cy.wait('@autocomplete').should('exist');
 
 			cy.snapController('autocomplete').then(({ store }) => {
+				expect(store.state.input).to.equal(config.startingQuery);
 				expect(store.terms.length).to.greaterThan(0);
-
-				term = store.terms[0].value;
 			});
 		});
 
 		it('has correct count and term in see more link', () => {
 			if (!config?.selectors?.autocomplete?.seeMore) this.skip();
+
 			cy.snapController('autocomplete').then(({ store }) => {
-				cy.get(config.selectors.autocomplete.seeMore).should('exist').contains(store.pagination.totalResults).contains(term);
+				const term = store.terms[0].value;
+
+				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`)
+					.should('exist')
+					.contains(store.pagination.totalResults)
+					.contains(term);
 			});
 		});
 
-		it('can clear input', function () {
-			if (!config?.selectors?.website?.input && !config?.startingQuery) this.skip();
-
-			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.startingQuery).clear().should('have.value', '');
-		});
-
-		it('can make term query', function () {
-			if (!config?.selectors?.website?.input) this.skip();
-
-			cy.get(config.selectors.website.input).first().should('exist').type(term);
-
-			cy.wait('@autocomplete').should('exist');
-
-			cy.snapController('autocomplete').then(({ store }) => {
-				expect(store.terms.length).to.greaterThan(0);
-
-				expect(store.terms[0].value).to.equal(term);
-			});
-		});
-
-		it('can hover over next term', function () {
+		it('can hover over term', function () {
 			if (!config?.selectors?.autocomplete?.term) this.skip();
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				if (!store.terms.length > 1) this.skip();
-				cy.get(`${config.selectors.autocomplete.term}`)
-					.eq(1)
-					.find('a')
-					.should('exist')
-					.trigger('focus')
-					.invoke('text')
-					.then((text) => {
-						expect(text).to.equal(store.terms[1].value);
-						term = text;
-					});
+				if (store.terms.length <= 1) this.skip();
+				cy.get('body').then((body) => {
+					if (!body.find(`${config.selectors.autocomplete.term}`).length) {
+						this.skip(); // skip if no terms in DOM
+					}
+				});
+
+				cy.get(`${config.selectors.autocomplete.term}`).last().find('a').should('exist').rightclick({ force: true }); // trigger onFocus event
+
+				cy.wait('@autocomplete').should('exist');
+
+				cy.snapController('autocomplete').then(({ store }) => {
+					const lastTerm = store.terms[store.terms.length - 1];
+					expect(lastTerm.active).to.equal(true);
+					expect(lastTerm.value).to.equal(store.search.query.string);
+				});
 			});
 		});
 
 		it('can hover over facet', function () {
 			if (!config?.selectors?.input && !config?.selectors?.autocomplete?.facet) this.skip();
 
-			cy.get(config.selectors.website.input).first().should('exist').clear().type(term);
-
+			cy.get(config.selectors.website.input).first().should('exist').clear({ force: true }).type(config.startingQuery, { force: true });
 			cy.wait('@autocomplete').should('exist');
 
 			cy.snapController('autocomplete').then(({ store }) => {
-				const totalResults = store.pagination.totalResults;
-				if (!store.facets.length > 0 || !store.facets[0].values.length > 0) this.skip(); //skip if this term has no facets
+				if (store.facets.length == 0) this.skip(); //skip if this term has no facets
+				cy.get('body').then((body) => {
+					if (!body.find(`${config.selectors.autocomplete.facet} a`).length) {
+						this.skip(); // skip if no facets in DOM
+					}
+				});
 
 				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
 					const firstOption = facetOptions[0];
-					expect(firstOption.innerText).to.equal(store.facets[0].values[0].label);
-					cy.get(firstOption).trigger('focus');
+					const optionURL = firstOption.href;
+
+					cy.get(firstOption).rightclick({ force: true }); // trigger onFocus event
+
+					cy.wait('@autocomplete').should('exist');
+
 					cy.snapController('autocomplete').then(({ store }) => {
-						expect(totalResults).to.be.at.least(store.pagination.totalResults);
+						cy.wrap(store.services.urlManager).its('state.filter').should('exist');
+						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
 					});
 				});
 			});
@@ -138,15 +144,23 @@ describe('Autocomplete', () => {
 			});
 		});
 
-		it('can click on see more link', function () {
+		it('has see more link with correct URL', function () {
 			if (!config?.selectors?.autocomplete?.seeMore) this.skip();
 
-			cy.snapController('autocomplete').then((controller) => {
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${controller.urlManager.href}"]`).should('exist').click({ force: true });
-				cy.on('url:changed', (newUrl) => {
-					expect(newUrl).to.contain(controller.urlManager.href);
-				});
+			cy.snapController('autocomplete').then(({ store }) => {
+				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`).should('exist');
 			});
+		});
+
+		it('can clear input', function () {
+			if (!config?.selectors?.website?.input && !config?.startingQuery) this.skip();
+
+			cy.get(config.selectors.website.input)
+				.first()
+				.should('exist')
+				.should('have.value', config.startingQuery)
+				.clear({ force: true })
+				.should('have.value', '');
 		});
 	});
 });
