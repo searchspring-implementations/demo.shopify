@@ -16,14 +16,13 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 
-beforeEach(() => {
-	// ignore party uncaught exceptions
-	cy.on('uncaught:exception', (err, runnable) => false);
+// ignore 3rd party uncaught exceptions
+Cypress.on('uncaught:exception', (err, runnable) => false);
 
+beforeEach(() => {
 	// make references to requests available
 	cy.intercept(/.*searchspring.io\/api\/search\/search/).as('search');
 	cy.intercept(/.*searchspring.io\/api\/search\/autocomplete/).as('autocomplete');
-	cy.intercept(/.*searchspring.io\/api\/meta\/meta/).as('meta');
 
 	// prevent v2 and v3 assets
 	cy.intercept(/.*searchspring.net\/search\/*/, (req) => {
@@ -43,6 +42,9 @@ beforeEach(() => {
 
 	// prevent 3rd party assets
 	cy.intercept(/.*widget.privy.com\/*/, (req) => {
+		req.destroy();
+	});
+	cy.intercept(/.*.swymrelay.com\/*/, (req) => {
 		req.destroy();
 	});
 });
