@@ -1,7 +1,7 @@
 {
 	"name": "demo.shopify",
 	"author": "kevin",
-	"version": "0.1.0",
+	"version": "0.22.0",
 	"main": "index.js",
 	"license": "MIT",
 	"private": true,
@@ -28,8 +28,8 @@
 	},
 	"prettier": "@searchspring/prettier",
 	"dependencies": {
-		"@searchspring/snap-preact": "^0.28.0",
-		"@searchspring/snap-preact-components": "^0.28.0",
+		"@searchspring/snap-preact": "^0.22.0",
+		"@searchspring/snap-preact-components": "^0.22.0",
 		"mobx": "^6.3.12",
 		"mobx-react": "^7.2.1",
 		"preact": "^10.6.4"
