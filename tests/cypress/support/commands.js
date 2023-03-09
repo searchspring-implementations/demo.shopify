@@ -1,28 +1,10 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
+// Custom Snap Cypress Commands
 //
 // For more comprehensive examples of custom
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import packageJSON from '../../../package.json';
 
@@ -60,23 +42,13 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 
 Cypress.Commands.add('snapController', (controllerId = 'search') => {
 	cy.window().then((window) => {
-		return new Cypress.Promise((resolve, reject) => {
+		return new Cypress.Promise((resolve) => {
 			const checkTimeout = 100;
 			let interval = setInterval(() => {
-				const cntrlr = window.searchspring.controller[controllerId];
-
-				if (cntrlr) {
-					clearInterval(interval);
-
-					const after = function afterLoad({ controller }) {
-						controller.eventManager.events.afterStore.remove(afterLoad);
-						resolve(cntrlr);
-					};
-	
-					if (cntrlr.store.loading) {
-						cntrlr.on('afterStore', after);
-					} else {
-						resolve(cntrlr);
+				if (window.searchspring.controller && window.searchspring.controller[controllerId]) {
+					if (!window.searchspring.controller[controllerId].store.loading) {
+						clearInterval(interval);
+						resolve(window.searchspring.controller[controllerId]);
 					}
 				}
 			}, checkTimeout);
