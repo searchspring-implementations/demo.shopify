@@ -1,8 +1,17 @@
 const webpack = require('webpack');
 const childProcess = require('child_process');
+const path = require('path');
+
+// determine branch name for branch override usage
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 
+// class name for for branch override usage
+const styleClass = 'ss-snap-bundle-styles';
+
 module.exports = {
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+	},
 	stats: {
 		modulesSort: 'size',
 		modulesSpace: 70,
@@ -21,12 +30,26 @@ module.exports = {
 			{
 				test: /\.(css|scss)$/,
 				exclude: /\.module\.(css|scss)$/,
-				use: ['style-loader', 'css-loader', 'sass-loader'],
+				use: [
+					{
+						loader: 'style-loader',
+						options: {
+							attributes: { class: styleClass },
+						},
+					},
+					'css-loader',
+					'sass-loader'
+				],
 			},
 			{
 				test: /\.module\.(css|scss)$/,
 				use: [
-					'style-loader',
+					{
+						loader: 'style-loader',
+						options: {
+							attributes: { class: styleClass },
+						},
+					},
 					{
 						loader: 'css-loader',
 						options: {
