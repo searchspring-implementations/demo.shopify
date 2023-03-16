@@ -24,7 +24,8 @@
 		"updates": [
 			"all"
 		],
-		"tags": []
+		"tags": [],
+		"version": "0.3.0"
 	},
 	"prettier": "@searchspring/prettier",
 	"dependencies": {
