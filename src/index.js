@@ -107,7 +107,6 @@ const config = {
 
 const snap = new Snap(config);
 
-console.log('...this is production...');
 snap.getController('search').then((controller) => {
 	controller.log.debug('we have the controller on production:', controller);
 });
