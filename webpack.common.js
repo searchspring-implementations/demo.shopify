@@ -26,6 +26,7 @@ module.exports = {
 		// }),
 	],
 	module: {
+		strictExportPresence: true,
 		rules: [
 			{
 				test: /\.(css|scss)$/,
