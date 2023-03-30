@@ -1,8 +1,8 @@
+// DO NOT EDIT - THIS FILE CAN/WILL BE REPLACED!!!
 // ***********************************************
 // Custom Snap Cypress Commands
 //
-// For more comprehensive examples of custom
-// commands please read more here:
+// For more comprehensive examples:
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
@@ -41,11 +41,11 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 });
 
 Cypress.Commands.add('snapController', (controllerId = 'search') => {
-	cy.window().then((window) => {
+	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
 			const checkTimeout = 100;
-			let interval = setInterval(() => {
-				if (window.searchspring.controller && window.searchspring.controller[controllerId]) {
+			const interval = setInterval(() => {
+				if (window.searchspring?.controller && window.searchspring.controller[controllerId]) {
 					if (!window.searchspring.controller[controllerId].store.loading) {
 						clearInterval(interval);
 						resolve(window.searchspring.controller[controllerId]);
