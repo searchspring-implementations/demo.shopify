@@ -1,3 +1,4 @@
+// DO NOT EDIT - THIS FILE CAN/WILL BE REPLACED!!!
 // ***********************************************************
 // Custom Snap Cypress Plugins
 //
