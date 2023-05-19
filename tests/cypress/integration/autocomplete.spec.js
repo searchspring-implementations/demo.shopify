@@ -1,5 +1,5 @@
 const config = {
-	url: 'https://localhost:3333/index.html',
+	url: 'https://searchspring-shop.myshopify.com',
 	disableGA: '',
 	selectors: {
 		website: {
@@ -25,6 +25,10 @@ describe('Autocomplete', () => {
 
 		it('adds snap bundle to autocomplete page', () => {
 			cy.visit(config.url);
+
+			cy.get('.content--block .form-input#password').first().should('exist').focus().type('eshobo', { force: true });
+			cy.get('.content--block button[type=submit]').first().should('exist').click({force: true})
+			
 			cy.addLocalSnap();
 
 			cy.waitForBundle().then(() => {

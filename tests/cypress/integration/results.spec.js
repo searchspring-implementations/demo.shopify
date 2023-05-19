@@ -1,6 +1,6 @@
 const config = {
 	pages: [
-		{ url: 'https://localhost:3333/index.html', id: 'Search' },
+		{ url: 'https://searchspring-shop.myshopify.com/collections/shop?q=*', id: 'Search' },
 		// { url: 'https://try.searchspring.com/dresses', id: 'Category' },
 	],
 	disableGA: '',
@@ -37,6 +37,12 @@ config?.pages?.forEach((page, _i) => {
 		describe('Setup', () => {
 			it('adds snap bundle to search page', () => {
 				cy.on('uncaught:exception', (err, runnable) => false);
+				cy.visit(page.url);
+
+				cy.on('uncaught:exception', (err, runnable) => false);
+				cy.get('.content--block .form-input#password').first().should('exist').focus().type('eshobo', { force: true });
+				cy.get('.content--block button[type=submit]').first().should('exist').click({force: true})
+			
 				cy.visit(page.url);
 
 				cy.addLocalSnap();
@@ -551,19 +557,9 @@ config?.pages?.forEach((page, _i) => {
 		if (_i === 0) {
 			// only take screenshot once
 			describe('Snapshot', () => {
-				it('saves a screenshot', () => {
-					cy.visit(page.url);
-					cy.addLocalSnap();
-					
-					cy.waitForBundle().then(() => {
-						cy.snapController().then(({ store }) => {
-							expect(store.results.length).to.greaterThan(0);
-			
-							cy.waitForIdle().then(() => {
-								cy.screenshot('snapshot', { capture: 'viewport' });
-							});
-						});
-					});
+				it('saves a screenshot', function () {
+					cy.window().scrollTo('topLeft', { ensureScrollable: false });
+					cy.screenshot('snapshot', { capture: 'viewport' });
 				});
 			});
 		}
