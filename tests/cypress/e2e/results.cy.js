@@ -48,14 +48,6 @@ config?.pages?.forEach((page, _i) => {
 						cy.get('.content--block button[type=submit]').first().should('exist').click({force: true})
 					}
 				});
-
-				// cy.get('.content--block .form-input#password')
-				// .then(($input) => {
-				// 	if ($input.length > 0 && $input.is(':visible')) {
-				// 		cy.get('.content--block .form-input#password').first().should('exist').focus().type('eshobo', { force: true });
-				// 		cy.get('.content--block button[type=submit]').first().should('exist').click({force: true})
-				// 	}
-				// })
 			
 				cy.visit(page.url);
 
