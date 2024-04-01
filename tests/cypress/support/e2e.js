@@ -9,7 +9,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 import './custom';
-import { ignoredErrors } from "./custom";
+import { ignoredErrors } from './custom';
 
 // ignore 3rd party uncaught exceptions - but not bundle exceptions
 Cypress.on('uncaught:exception', (err) => {
@@ -46,7 +46,7 @@ beforeEach(() => {
 	});
 
 	// prevent snap assets
-	cy.intercept(/.*snapui.searchspring.io\/.*.js$/, (req) => {
+	cy.intercept(/.*snapui.searchspring.io\/.*.js.*$/, (req) => {
 		req.destroy();
 	});
 });
