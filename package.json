@@ -19,7 +19,11 @@
 		"prepare": "husky install"
 	},
 	"searchspring": {
-		"siteId": "y56s6x",
+		"siteId": {
+			"y56s6x": {
+				"name": "demo.shopify"
+			}
+		},
 		"framework": "preact",
 		"updates": [
 			"all"
