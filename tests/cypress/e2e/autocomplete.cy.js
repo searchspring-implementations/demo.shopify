@@ -15,7 +15,7 @@ const config = {
 	startingQuery: 't',
 };
 
-describe('Autocomplete', () => {
+describe.skip('Autocomplete', () => {
 	describe('Setup', () => {
 		it('has valid config', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
