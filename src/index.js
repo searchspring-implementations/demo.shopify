@@ -69,7 +69,7 @@ const config = {
 				targeters: [
 					{
 						name: 'title',
-						selector: '.ss-shop .section-header__title',
+						selector: '.section-header__title',
 						component: async () => (await import('./components/SearchHeader')).SearchHeader,
 						hideTarget: true,
 					},
@@ -81,7 +81,7 @@ const config = {
 					},
 					{
 						name: 'main',
-						selector: '#searchspring-content',
+						selector: '#ProductGridContainer .template-search__results',
 						component: async () => (await import('./components/Content')).Content,
 						hideTarget: true,
 					},
@@ -92,11 +92,11 @@ const config = {
 			{
 				config: {
 					id: 'autocomplete',
-					selector: '.header-bar__search-input',
+					selector: '.search-modal__content input.search__input',
 				},
 				targeters: [
 					{
-						selector: '.header-bar__search-input',
+						selector: '.search-modal__content input.search__input',
 						component: async () => (await import('./components/Autocomplete')).Autocomplete,
 					},
 				],
