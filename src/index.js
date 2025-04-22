@@ -81,7 +81,7 @@ const config = {
 					},
 					{
 						name: 'main',
-						selector: '#ProductGridContainer .template-search__results',
+						selector: '#ProductGridContainer .template-search__results, .ss-shop .collection',
 						component: async () => (await import('./components/Content')).Content,
 						hideTarget: true,
 					},
