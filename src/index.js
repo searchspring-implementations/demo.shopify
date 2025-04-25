@@ -84,6 +84,7 @@ const config = {
 						selector: '#ProductGridContainer .template-search__results, .ss-shop .collection',
 						component: async () => (await import('./components/Content')).Content,
 						hideTarget: true,
+						prefetch: Boolean(context.collection?.handle),
 					},
 				],
 			},

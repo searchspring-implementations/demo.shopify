@@ -24,6 +24,9 @@ export class Results extends Component {
 					hideTitle: true,
 					detailSlot: <ResultDetails />,
 				},
+				image: {
+					lazy: false,
+				},
 			},
 		};
 
