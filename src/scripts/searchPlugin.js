@@ -24,4 +24,17 @@ export const searchPlugin = (controller) => {
 
 		await next();
 	});
+
+	controller.on('afterSearch', async ({ response }, next) => {
+		response.results.forEach((result, index) => {
+			// preload first few images
+			const preloadCount = 8;
+			if (index < preloadCount) {
+				const img = new Image();
+				img.src = result.mappings?.core?.imageUrl;
+			}
+		});
+
+		await next();
+	});
 };
