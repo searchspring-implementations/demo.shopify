@@ -85,6 +85,7 @@ const config = {
 						component: async () => (await import('./components/Content')).Content,
 						// hideTarget: true,
 						prefetch: Boolean(context.collection?.handle),
+						renderAfterSearch: true,
 					},
 				],
 			},
