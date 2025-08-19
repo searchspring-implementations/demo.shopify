@@ -1,20 +1,19 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Fragment } from 'preact';
+import { useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react';
-import { FilterSummary, Price, Results as _Results, InlineBanner, withController } from '@searchspring/snap-preact-components';
+import { FilterSummary, Price, Results as LibraryResults, InlineBanner, withController } from '@searchspring/snap-preact-components';
 import classnames from 'classnames';
 
-@withController
-@observer
-export class Results extends Component {
-	componentDidMount() {
-		// custom JS integration code
-	}
-	componentDidUpdate() {
-		// custom JS integration code
-	}
+export const Results = withController(
+	observer(({ controller }) => {
+		useEffect(() => {
+			// custom JS integration code
+		}, []);
 
-	render() {
-		const controller = this.props.controller;
+		useEffect(() => {
+			// custom JS integration code
+		});
+
 		const { results } = controller.store;
 
 		const theme = {
@@ -30,75 +29,9 @@ export class Results extends Component {
 			},
 		};
 
-		return (
-			// <div class="grid-uniform grid-link__container">
-			// 	{results.map((result) => (
-			// 		<div key={result.id} class="grid__item wide--one-third large--one-half medium--one-half small--one">
-			// 			{{
-			// 				banner: <InlineBanner banner={result} />,
-			// 			}[result.type] || <Result result={result} />}
-			// 		</div>
-			// 	))}
-			// </div>
-			<_Results controller={controller} results={results} theme={theme} />
-		);
-	}
-}
-
-// @withController
-// @observer
-// class Result extends Component {
-// 	render() {
-// 		const { result } = this.props;
-// 		const {
-// 			custom,
-// 			attributes,
-// 			mappings: { core },
-// 		} = result;
-// 		const intellisuggest = (e) => controller.track.product.click(e, result);
-// 		const onSale = Boolean(attributes.ss_on_sale);
-
-// 		return (
-// 			result && (
-// 				<div>
-// 					<div class={classnames({ 'on-sale': onSale })}>
-// 						<a href={core.url} class="grid-link" onClick={intellisuggest}>
-// 							<span class="grid-link__image grid-link__image-loading grid-link__image-sold-out grid-link__image--product" data-image-wrapper>
-// 								{onSale && (
-// 									<span class="badge badge--sale">
-// 										<span class="badge__text">Sale</span>
-// 									</span>
-// 								)}
-
-// 								<span class="grid-link__image-centered">
-// 									<div id={`ProductImageWrapper-${result.id}`} class="product__img-wrapper supports-js">
-// 										<div style="padding-top: 66.81081081081082%">
-// 											<img
-// 												id={`ProductImage-${result.id}`}
-// 												alt={core.name}
-// 												class="product__img lazyload"
-// 												data-src={custom.srcSet}
-// 												data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
-// 												data-aspectratio="1.4967637540453074"
-// 												data-sizes="auto"
-// 												data-image
-// 											/>
-// 										</div>
-// 									</div>
-
-// 									<noscript>
-// 										<img src={core.imageUrl} alt={core.name} class="product__img" />
-// 									</noscript>
-// 								</span>
-// 							</span>
-// 							<ResultDetails result={result} />
-// 						</a>
-// 					</div>
-// 				</div>
-// 			)
-// 		);
-// 	}
-// }
+		return <LibraryResults controller={controller} results={results} theme={theme} />;
+	})
+);
 
 export const ResultDetails = ({ result }) => {
 	const {
@@ -124,11 +57,8 @@ export const ResultDetails = ({ result }) => {
 	);
 };
 
-@withController
-@observer
-export class NoResults extends Component {
-	render() {
-		const controller = this.props.controller;
+export const NoResults = withController(
+	observer(({ controller }) => {
 		const store = controller.store;
 		const dym = store.search.didYouMean;
 		const contactEmail = 'contact@thesite.com';
@@ -204,5 +134,5 @@ export class NoResults extends Component {
 				</div>
 			</div>
 		);
-	}
-}
+	})
+);

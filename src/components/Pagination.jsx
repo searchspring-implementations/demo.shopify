@@ -1,14 +1,11 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 import classnames from 'classnames';
 
 import { withController } from '@searchspring/snap-preact-components';
 
-@withController
-@observer
-export class Pagination extends Component {
-	render() {
-		const controller = this.props.controller;
+export const Pagination = withController(
+	observer(({ controller }) => {
 		const {
 			store: { pagination },
 		} = controller;
@@ -53,5 +50,5 @@ export class Pagination extends Component {
 				</div>
 			)
 		);
-	}
-}
+	})
+);

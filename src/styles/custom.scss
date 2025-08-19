@@ -43,7 +43,8 @@
 	right: 0px;
 	left: auto;
 	width: 900px;
-	&, & a {
+	&,
+	& a {
 		color: #403b37;
 	}
 	.ss__facet-list-options__option {
@@ -84,12 +85,17 @@
 	width: 100%;
 	max-width: 300px; /* Adjust based on design */
 	display: block;
-  }
-  
-  .ss__result__image img {
+}
+
+.ss__result__image img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	display: block;
-  }
-  
+}
+
+.ss__search-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

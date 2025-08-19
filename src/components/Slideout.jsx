@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 import classnames from 'classnames';
 
@@ -13,11 +13,8 @@ const buttonStyle = {
 	justifyContent: 'space-between',
 };
 
-@withController
-@observer
-export class Slideout extends Component {
-	render() {
-		const controller = this.props.controller;
+export const Slideout = withController(
+	observer(({ controller }) => {
 		const { pagination, facets, custom } = controller.store;
 
 		return (
@@ -28,8 +25,8 @@ export class Slideout extends Component {
 				</LibrarySlideout>
 			)
 		);
-	}
-}
+	})
+);
 
 const SlideoutContents = withController((props) => {
 	return (
