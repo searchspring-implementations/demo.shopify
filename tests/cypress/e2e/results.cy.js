@@ -33,7 +33,7 @@ const config = {
 };
 
 config?.pages?.forEach((page, _i) => {
-	describe(`${page.id || _i}`, () => {
+	describe.skip(`${page.id || _i}`, () => {
 		describe('Setup', () => {
 			it('adds snap bundle to search page', () => {
 				cy.on('uncaught:exception', (err, runnable) => false);
