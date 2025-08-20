@@ -4,6 +4,7 @@ import { getContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
 import { searchPlugin } from './scripts/searchPlugin';
+import { liquidPlugin } from './scripts/liquidPlugin';
 import './styles/custom.scss';
 
 /*
@@ -61,7 +62,7 @@ const config = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[searchPlugin]],
+					plugins: [[searchPlugin], [liquidPlugin]],
 					globals: {
 						filters: backgroundFilters,
 					},

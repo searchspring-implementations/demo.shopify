@@ -1,36 +1,95 @@
 import { h, Fragment } from 'preact';
-import { useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react';
-import { FilterSummary, Price, Results as LibraryResults, InlineBanner, withController } from '@searchspring/snap-preact-components';
-import classnames from 'classnames';
+import {
+	Price,
+	InlineBanner,
+	withController,
+	withTracking,
+	useMediaQuery,
+	OverlayBadge,
+	CalloutBadge,
+	Image,
+} from '@searchspring/snap-preact-components';
 
 export const Results = withController(
-	observer(({ controller }) => {
-		useEffect(() => {
-			// custom JS integration code
-		}, []);
-
-		useEffect(() => {
-			// custom JS integration code
-		});
-
+	observer((props) => {
+		const controller = props.controller;
 		const { results } = controller.store;
 
-		const theme = {
-			components: {
-				result: {
-					hidePricing: true,
-					hideTitle: true,
-					detailSlot: <ResultDetails />,
-				},
-				image: {
-					lazy: false,
-				},
-			},
-		};
+		const isMobile = useMediaQuery('(max-width: 767px)');
 
-		return <LibraryResults controller={controller} results={results} theme={theme} />;
+		return (
+			<div className="ss__results" style={{ display: 'grid', gap: '40px', gridTemplateColumns: `repeat(${isMobile ? 2 : 4}, 1fr)` }}>
+				{results.map((result) => (
+					<div className="ss__result" key={result.id}>
+						{
+							{
+								banner: <InlineBanner banner={result} />,
+								product: result.attributes.shopifyTemplateHTML ? (
+									<ShopifyResult controller={controller} result={result} />
+								) : (
+									<Result result={result} controller={controller} />
+								),
+							}[result.type]
+						}
+					</div>
+				))}
+			</div>
+		);
 	})
+);
+
+const Result = withController(
+	withTracking(
+		observer((props) => {
+			const { result, controller, trackingRef } = props;
+			const {
+				attributes,
+				mappings: { core },
+			} = result;
+
+			return (
+				result && (
+					<div className="ss__result__wrapper" ref={trackingRef}>
+						<a href={core.url}>
+							<OverlayBadge controller={controller} result={result}>
+								<Image src={core.imageUrl} />
+							</OverlayBadge>
+						</a>
+						<hr />
+
+						<CalloutBadge result={result} />
+
+						<div>
+							<a href={core.url}>{core.name}</a>
+						</div>
+
+						<div>
+							<Price value={core.price} />
+						</div>
+
+						<hr />
+					</div>
+				)
+			);
+		})
+	)
+);
+
+const ShopifyResult = withController(
+	withTracking(
+		observer((props) => {
+			const { result, controller, trackingRef } = props;
+			const {
+				attributes,
+				mappings: { core },
+			} = result;
+
+			return (
+				result && <div className="ss__result__wrapper" ref={trackingRef} dangerouslySetInnerHTML={{ __html: attributes.shopifyTemplateHTML }}></div>
+			);
+		})
+	)
 );
 
 export const ResultDetails = ({ result }) => {
