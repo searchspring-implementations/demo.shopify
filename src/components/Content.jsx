@@ -33,7 +33,7 @@ export const Content = observer(({ controller }) => {
 							</div>
 						)}
 
-						<div class="ss__contents">
+						<div class="ss__contents" style={{ width: '100%' }}>
 							<Banner content={merchandising.content} type="header" />
 							<Banner content={merchandising.content} type="banner" />
 
