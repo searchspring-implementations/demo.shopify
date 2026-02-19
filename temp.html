@@ -1,0 +1,471 @@
+<!-- Dawn theme -->
+
+<!-- desktop toolbar -->
+<facet-filters-form className="facets facets-vertical-sort page-width small-hide">
+	<form className="facets-vertical-form" id="FacetSortForm">
+		<div className="facet-filters sorting caption">
+			<div className="facet-filters__field">
+				<h2 className="facet-filters__label caption-large text-body">
+					<label for="SortBy">Sort by:</label>
+				</h2>
+				<div className="select">
+					<select name="sort_by" className="facet-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+						<option value="manual">
+							Featured
+						</option>
+						<option value="best-selling">
+							Best selling
+						</option>
+						<option value="title-ascending" selected="selected">
+							Alphabetically, A-Z
+						</option>
+					</select>
+					<span className="svg-wrapper">
+						<svg className="icon icon-caret" viewBox="0 0 10 6">
+							<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd" />
+						</svg>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div className="product-count-vertical light" role="status">
+			<h2 className="product-count__text text-body">
+				<span id="ProductCountDesktop">60 products
+				</span>
+			</h2>
+
+			<div className="loading__spinner hidden">
+				<svg xmlns="http://www.w3.org/2000/svg" className="spinner" viewBox="0 0 66 66">
+					<circle stroke-width="6" cx="33" cy="33" r="30" fill="none" className="path" />
+				</svg>
+
+			</div>
+		</div>
+	</form>
+</facet-filters-form>
+
+<!-- facets -->
+<!-- <link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-show-more.css?v=139536189637226996221770084012" rel="stylesheet" type="text/css" media="all" /> -->
+<!-- <link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-swatch-input.css?v=61683592951238328641770084012" rel="stylesheet" type="text/css" media="all" /> -->
+<!-- <link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-swatch.css?v=6811383713633888781770084012" rel="stylesheet" type="text/css" media="all" /> -->
+<div className="facets-container scroll-trigger animate--fade-in">
+	<facet-filters-form className="facets small-hide">
+		<form id="FacetFiltersForm" className="facets__form-vertical">
+			<div id="FacetsWrapperDesktop">
+
+				<!-- filter summary -->
+				<div className="active-facets active-facets-desktop">
+					<div className="active-facets-vertical-filter">
+						<h2 className="facets__heading facets__heading--vertical caption-large text-body" id="verticalTitle" tabindex="-1">
+							Filter:
+						</h2>
+						<facet-remove className="active-facets__button-wrapper">
+							<a href="/collections/all" className="active-facets__button-remove underlined-link" role="button">
+								<span>Remove all</span>
+							</a>
+						</facet-remove>
+					</div>
+					<facet-remove>
+						<a href="/collections/all?sort_by=title-ascending" className="active-facets__button active-facets__button--light" role="button">
+							<span className="active-facets__button-inner button button--tertiary">
+								Availability: In stock
+								<span className="svg-wrapper">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-close-small" viewBox="0 0 12 13">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8.486 9.33 2.828 3.67M2.885 9.385l5.544-5.77"></path>
+									</svg>
+								</span>
+								<span className="visually-hidden">Remove filter</span>
+							</span>
+						</a>
+					</facet-remove>
+				</div>
+
+				<!-- <script src="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/show-more.js?v=135784227224860024771770084012" defer="defer"></script> -->
+
+				<!-- list facet -->
+				<details id="Details-filter.v.availability-template--18107665809608__product-grid" className="facets__disclosure-vertical js-filter" data-index="1" open>
+					<summary className="facets__summary caption-large focus-offset" aria-label="Availability (0 selected)">
+						<div>
+							<span className="facets__summary-label">Availability
+								<span className="facets__selected hidden">(0)</span>
+							</span>
+							<svg className="icon icon-caret" viewBox="0 0 10 6">
+								<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd" />
+							</svg>
+						</div>
+					</summary>
+					<div id="Facet-1-template--18107665809608__product-grid" className="parent-display facets__display-vertical">
+						<fieldset className="facets-wrap parent-wrap facets-wrap-vertical">
+							<legend className="visually-hidden">Availability</legend>
+							<ul className="facets-layout facets-layout-list facets-layout-list--text facets__list--vertical list-unstyled" role="list">
+								<li className="list-menu__item facets__item">
+									<label for="Filter-filter.v.availability-1" className="facets__label facet-checkbox">
+										<input type="checkbox" name="filter.v.availability" value="1" id="Filter-filter.v.availability-1">
+										<svg width="16px" height="16px" viewBox="0 0 16 16">
+											<rect width="16" height="16" fill="none" stroke="currentColor" />
+										</svg>
+										<div className="svg-wrapper">
+											<svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-checkmark" viewBox="0 0 12 9">
+												<path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd" />
+											</svg>
+										</div>
+										<span className="facet-checkbox__text" aria-hidden="true">
+											<span className="facet-checkbox__text-label">In stock</span> (60)
+										</span>
+										<span className="visually-hidden">In stock (60 products)</span>
+									</label>
+								</li>
+							</ul>
+						</fieldset>
+					</div>
+				</details>
+
+				<!-- input facet -->
+				<details id="Details-filter.v.price-template--18107665809608__product-grid" className=" facets__disclosure-vertical js-filter" data-index="2">
+					<summary className="facets__summary caption-large focus-offset">
+						<div>
+							<span>Price</span><svg className="icon icon-caret" viewBox="0 0 10 6">
+								<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd" />
+							</svg>
+						</div>
+					</summary>
+					<div id="Facet-2-template--18107665809608__product-grid" className="facets__display-vertical">
+						<div className="facets__header-vertical"><span className="facets__selected">The highest price is $750.00</span></div>
+						<price-range className="facets__price">
+							<span className="field-currency">$</span>
+
+							<div className="field">
+								<input className="field__input" name="filter.v.price.gte" id="Filter-Price-GTE" type="text" inputmode="decimal" placeholder="0" data-pattern="\d| |,|\." data-min="0" data-max="750.00">
+								<label className="field__label" for="Filter-Price-GTE">From</label>
+							</div>
+							<div className="field">
+								<input className="field__input" name="filter.v.price.lte" id="Filter-Price-LTE" type="text" inputmode="decimal" placeholder="750.00" data-pattern="\d| |,|\." data-min="0" data-max="750.00">
+								<label className="field__label" for="Filter-Price-LTE">To</label>
+							</div>
+
+						</price-range>
+					</div>
+				</details>
+
+			</div>
+		</form>
+	</facet-filters-form>
+
+	<!-- mobile facets -->
+	<menu-drawer className="mobile-facets__wrapper medium-hide large-up-hide" data-breakpoint="mobile">
+		<details className="mobile-facets__disclosure disclosure-has-popup">
+			<summary className="mobile-facets__open-wrapper focus-offset">
+				<span className="mobile-facets__open">
+					<span className="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-filter" viewBox="0 0 20 20">
+							<path fill="currentColor" fill-rule="evenodd" d="M4.833 6.5a1.667 1.667 0 1 1 3.334 0 1.667 1.667 0 0 1-3.334 0M4.05 7H2.5a.5.5 0 0 1 0-1h1.55a2.5 2.5 0 0 1 4.9 0h8.55a.5.5 0 0 1 0 1H8.95a2.5 2.5 0 0 1-4.9 0m11.117 6.5a1.667 1.667 0 1 0-3.334 0 1.667 1.667 0 0 0 3.334 0M13.5 11a2.5 2.5 0 0 1 2.45 2h1.55a.5.5 0 0 1 0 1h-1.55a2.5 2.5 0 0 1-4.9 0H2.5a.5.5 0 0 1 0-1h8.55a2.5 2.5 0 0 1 2.45-2" />
+						</svg>
+					</span>
+					<span className="mobile-facets__open-label button-label medium-hide large-up-hide">Filter and sort
+					</span>
+					<span className="mobile-facets__open-label button-label small-hide">Filter
+					</span>
+				</span>
+				<span tabindex="0" className="mobile-facets__close">
+					<span className="svg-wrapper"><svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-close" viewBox="0 0 18 17">
+							<path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z" />
+						</svg>
+					</span>
+				</span>
+			</summary>
+			<facet-filters-form>
+				<form id="FacetFiltersFormMobile" className="mobile-facets">
+					<div className="mobile-facets__inner gradient">
+						<div className="mobile-facets__header">
+							<div className="mobile-facets__header-inner">
+								<h2 className="mobile-facets__heading medium-hide large-up-hide">Filter and sort
+								</h2>
+								<h2 className="mobile-facets__heading small-hide">Filter
+								</h2>
+								<p className="mobile-facets__count">60 products
+								</p>
+							</div>
+						</div>
+						<div id="FacetsWrapperMobile" className="mobile-facets__main has-submenu gradient">
+
+
+							<details id="Details-Mobile-filter.v.availability-template--18107665809608__product-grid" className="mobile-facets__details js-filter" data-index="mobile-1">
+								<summary className="mobile-facets__summary focus-inset">
+									<div>
+										<span>Availability</span>
+										<span className="mobile-facets__arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-arrow" viewBox="0 0 14 10">
+												<path fill="currentColor" fill-rule="evenodd" d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546" clip-rule="evenodd" />
+											</svg>
+										</span>
+									</div>
+								</summary>
+								<div id="FacetMobile-1-template--18107665809608__product-grid" className="mobile-facets__submenu gradient">
+									<button className="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-arrow" viewBox="0 0 14 10">
+											<path fill="currentColor" fill-rule="evenodd" d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546" clip-rule="evenodd" />
+										</svg>
+										<span>Availability</span></button>
+									<ul className="facets-layout facets-layout-list facets-layout-list--text mobile-facets__list list-unstyled" role="list">
+										<li className="mobile-facets__item list-menu__item">
+
+											<label for="Filter-filter.v.availability-mobile-1" className="facets__label mobile-facets__label">
+												<input className="mobile-facets__checkbox" type="checkbox" name="filter.v.availability" value="1" id="Filter-filter.v.availability-mobile-1"><span className="mobile-facets__highlight"></span><svg width="16px" height="16px" viewBox="0 0 16 16">
+													<rect width="16" height="16" fill="none" stroke="currentColor" />
+												</svg>
+												<svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-checkmark" viewBox="0 0 12 9">
+													<path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd" />
+												</svg>
+
+
+												<span className="facet-checkbox__text" aria-hidden="true">
+													<span className="facet-checkbox__text-label">In stock</span> (60)
+												</span>
+												<span className="visually-hidden">In stock (60 products)
+												</span>
+											</label>
+
+										</li>
+										<li className="mobile-facets__item list-menu__item">
+											<label for="Filter-filter.v.availability-mobile-2" className="facets__label mobile-facets__label disabled">
+												<input className="mobile-facets__checkbox" type="checkbox" name="filter.v.availability" value="0" id="Filter-filter.v.availability-mobile-2" disabled><span className="mobile-facets__highlight"></span><svg width="16px" height="16px" viewBox="0 0 16 16">
+													<rect width="16" height="16" fill="none" stroke="currentColor" />
+												</svg>
+												<svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-checkmark" viewBox="0 0 12 9">
+													<path fill="currentColor" fill-rule="evenodd" d="M11.35.643a.5.5 0 0 1 .006.707l-6.77 6.886a.5.5 0 0 1-.719-.006L.638 4.845a.5.5 0 1 1 .724-.69l2.872 3.011 6.41-6.517a.5.5 0 0 1 .707-.006z" clip-rule="evenodd" />
+												</svg>
+												<span className="facet-checkbox__text" aria-hidden="true">
+													<span className="facet-checkbox__text-label">Out of stock</span> (0)
+												</span>
+												<span className="visually-hidden">Out of stock (0 products)
+												</span>
+											</label>
+										</li>
+									</ul>
+
+									<div className="mobile-facets__footer gradient">
+										<facet-remove className="mobile-facets__clear-wrapper">
+											<a href="/collections/all" className="mobile-facets__clear underlined-link">Clear</a>
+										</facet-remove>
+										<button type="button" className="button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+											Apply
+										</button>
+									</div>
+								</div>
+							</details>
+
+							<details id="Details-Mobile-filter.v.price-template--18107665809608__product-grid" className="mobile-facets__details js-filter" data-index="mobile-2">
+								<summary className="mobile-facets__summary focus-inset">
+									<div>
+										<span>Price</span>
+										<span className="mobile-facets__arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-arrow" viewBox="0 0 14 10">
+												<path fill="currentColor" fill-rule="evenodd" d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546" clip-rule="evenodd" />
+											</svg>
+										</span>
+									</div>
+								</summary>
+								<div id="FacetMobile-2-template--18107665809608__product-grid" className="mobile-facets__submenu gradient">
+									<button className="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button">
+										<svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon icon-arrow" viewBox="0 0 14 10">
+											<path fill="currentColor" fill-rule="evenodd" d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546" clip-rule="evenodd" />
+										</svg>
+										Price
+									</button>
+									<p className="mobile-facets__info">
+										The highest price is $750.00
+									</p>
+									<price-range className="facets__price">
+										<span className="field-currency">$</span>
+										<div className="field">
+											<input className="field__input" name="filter.v.price.gte" id="Mobile-Filter-Price-GTE" type="text" inputmode="decimal" placeholder="0" data-pattern="\d| |,|\." data-min="0" data-max="750.00">
+											<label className="field__label" for="Mobile-Filter-Price-GTE">From</label>
+										</div><span className="field-currency">$</span>
+										<div className="field">
+											<input className="field__input" name="filter.v.price.lte" id="Mobile-Filter-Price-LTE" type="text" inputmode="decimal" placeholder="750.00" data-pattern="\d| |,|\." data-min="0" data-max="750.00">
+											<label className="field__label" for="Mobile-Filter-Price-LTE">To</label>
+										</div>
+									</price-range>
+									<div className="mobile-facets__footer">
+										<facet-remove className="mobile-facets__clear-wrapper">
+											<a href="/collections/all" className="mobile-facets__clear underlined-link">Clear</a>
+										</facet-remove>
+										<button type="button" className="button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+											Apply
+										</button>
+									</div>
+								</div>
+							</details>
+							<div id="Details-Mobile-SortBy-template--18107665809608__product-grid" className="mobile-facets__details js-filter" data-index="mobile-">
+								<div className="mobile-facets__summary">
+									<div className="mobile-facets__sort">
+										<label for="SortBy-mobile">Sort by:</label>
+										<div className="select">
+											<select name="sort_by" className="select__select" id="SortBy-mobile" aria-describedby="a11y-refresh-page-message">
+												<option value="manual">
+													Featured
+												</option>
+												<option value="best-selling">
+													Best selling
+												</option>
+												<option value="title-ascending" selected="selected">
+													Alphabetically, A-Z
+												</option>
+												<option value="title-descending">
+													Alphabetically, Z-A
+												</option>
+												<option value="price-ascending">
+													Price, low to high
+												</option>
+												<option value="price-descending">
+													Price, high to low
+												</option>
+												<option value="created-ascending">
+													Date, old to new
+												</option>
+												<option value="created-descending">
+													Date, new to old
+												</option>
+											</select>
+											<span className="svg-wrapper"><svg className="icon icon-caret" viewBox="0 0 10 6">
+													<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd" />
+												</svg>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="mobile-facets__footer">
+								<facet-remove className="mobile-facets__clear-wrapper">
+									<a href="/collections/all" className="mobile-facets__clear underlined-link">Remove all</a>
+								</facet-remove>
+								<button type="button" className="button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+									Apply
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</facet-filters-form>
+		</details>
+	</menu-drawer>
+	<!-- mobile filter summary -->
+	<div className="active-facets active-facets-mobile medium-hide large-up-hide">
+		<facet-remove className="active-facets__button-wrapper">
+			<a href="/collections/all" className="active-facets__button-remove underlined-link">
+				<span>Remove all</span>
+			</a>
+		</facet-remove>
+	</div>
+	<!-- mobile toolbar -->
+	<div className="product-count light medium-hide large-up-hide" role="status">
+		<h2 className="product-count__text text-body">
+			<span id="ProductCount">60 products
+			</span>
+		</h2>
+		<div className="loading__spinner hidden">
+			<svg xmlns="http://www.w3.org/2000/svg" className="spinner" viewBox="0 0 66 66">
+				<circle stroke-width="6" cx="33" cy="33" r="30" fill="none" className="path" />
+			</svg>
+		</div>
+	</div>
+</div>
+
+<!-- content -->
+<div className="collection">
+	<!-- <div className="loading-overlay gradient"></div> -->
+	<ul id="product-grid" data-id="template--18107665809608__product-grid" className="grid product-grid grid--2-col-tablet-down grid--4-col-desktop">
+
+		<li className="grid__item scroll-trigger animate--slide-in" data-cascade style="--animation-order: 1;">
+
+			<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-rating.css?v=179577762467860590411770084012" rel="stylesheet" type="text/css" media="all" />
+			<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-volume-pricing.css?v=111870094811454961941770084012" rel="stylesheet" type="text/css" media="all" />
+
+			<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-price.css?v=47596247576480123001770084012" rel="stylesheet" type="text/css" media="all" />
+			<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/quick-order-list.css?v=86354568948591544181770084012" rel="stylesheet" type="text/css" media="all" />
+			<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/quantity-popover.css?v=160630540099520878331770084012" rel="stylesheet" type="text/css" media="all" />
+			<div className="card-wrapper product-card-wrapper underline-links-hover">
+				<div className="card card--standard card--media" style="--ratio-percent: 100%;">
+					<div className="card__inner color-scheme-2 gradient ratio" style="--ratio-percent: 100%;">
+						<div className="card__media">
+							<div className="media media--transparent media--hover-effect">
+								<img srcset="//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971&width=165 165w,//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971&width=360 360w,//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971&width=533 533w,//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971&width=720 720w,//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971 925w" src="//searchspring-shop.myshopify.com/cdn/shop/products/navy-blue-chakra-bracelet_925x_fdde53d6-fbed-4fef-967e-514c0b290bf4.jpg?v=1626791971&width=533" sizes="(min-width: 1200px) 267px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="7 Shakra Bracelet" className="motion-reduce" width="925" height="618">
+								<img srcset="//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971&width=165 165w,//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971&width=360 360w,//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971&width=533 533w,//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971&width=720 720w,//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971 925w" src="//searchspring-shop.myshopify.com/cdn/shop/products/7-chakra-bracelet_925x_f4116817-f559-43f3-b7dc-1303b6e8e857.jpg?v=1626791971&width=533" sizes="(min-width: 1200px) 267px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="7 Shakra Bracelet" className="motion-reduce" loading="lazy" width="925" height="1386">
+							</div>
+						</div>
+						<div className="card__content">
+							<div className="card__information">
+								<h3 className="card__heading">
+									<a href="/products/chain-bracelet" id="StandardCardNoMediaLink-template--18107665809608__product-grid-6962317754568" className="full-unstyled-link" aria-labelledby="StandardCardNoMediaLink-template--18107665809608__product-grid-6962317754568 NoMediaStandardBadge-template--18107665809608__product-grid-6962317754568">
+										7 Shakra Bracelet
+									</a>
+								</h3>
+							</div>
+							<div className="card__badge bottom left"><span id="NoMediaStandardBadge-template--18107665809608__product-grid-6962317754568" className="badge badge--bottom-left color-scheme-4">Sale</span></div>
+						</div>
+					</div>
+					<div className="card__content">
+						<div className="card__information">
+							<h3 className="card__heading h5" id="title-template--18107665809608__product-grid-6962317754568">
+								<a href="/products/chain-bracelet" id="CardLink-template--18107665809608__product-grid-6962317754568" className="full-unstyled-link" aria-labelledby="CardLink-template--18107665809608__product-grid-6962317754568 Badge-template--18107665809608__product-grid-6962317754568">
+									7 Shakra Bracelet
+								</a>
+							</h3>
+							<div className="card-information"><span className="caption-large light"></span>
+								<div className="price price--on-sale">
+									<div className="price__container">
+										<div className="price__regular"><span className="visually-hidden visually-hidden--inline">Regular price</span>
+											<span className="price-item price-item--regular">
+												$42.99 USD
+											</span>
+										</div>
+										<div className="price__sale">
+											<span className="visually-hidden visually-hidden--inline">Regular price</span>
+											<span>
+												<s className="price-item price-item--regular">
+													$44.99 USD
+												</s>
+											</span><span className="visually-hidden visually-hidden--inline">Sale price</span>
+											<span className="price-item price-item--sale price-item--last">
+												$42.99 USD
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="card__badge bottom left">
+							<span id="Badge-template--18107665809608__product-grid-6962317754568" className="badge badge--bottom-left color-scheme-4">Sale</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+		
+	</ul>
+
+	<link href="//searchspring-shop.myshopify.com/cdn/shop/t/8/assets/component-pagination.css?v=136206814810731739951770084012" rel="stylesheet" type="text/css" media="all" />
+	<div className="pagination-wrapper" data-page="1">
+		<nav className="pagination" role="navigation" aria-label="Pagination">
+			<ul className="pagination__list list-unstyled" role="list">
+				<li>
+					<a href="/collections/all?filter.v.availability=1&amp;page=1&amp;sort_by=title-ascending" className="pagination__item pagination__item--next pagination__item-arrow link motion-reduce" aria-label="Previous page">
+						<span className="svg-wrapper"><svg className="icon icon-caret" viewBox="0 0 10 6">
+								<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+							</svg>
+						</span>
+					</a>
+				</li>
+				<li><a role="link" aria-disabled="true" className="pagination__item pagination__item--current light" aria-current="page" aria-label="Page 1">1</a></li>
+				<li><a href="/collections/all?page=2" className="pagination__item link" aria-label="Page 2">2</a></li>
+				<li><a href="/collections/all?page=3" className="pagination__item link" aria-label="Page 3">3</a></li>
+				<li><a href="/collections/all?page=4" className="pagination__item link" aria-label="Page 4">4</a></li>
+				<li>
+					<a href="/collections/all?page=2" className="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce" aria-label="Next page">
+						<span className="svg-wrapper"><svg className="icon icon-caret" viewBox="0 0 10 6">
+								<path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd" />
+							</svg>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

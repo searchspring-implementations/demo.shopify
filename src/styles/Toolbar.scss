@@ -1,0 +1,22 @@
+.ss__toolbar {
+	margin-bottom: 20px;
+	.ss__toolbar--count-sort {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+	.facet-filters {
+		display: inline-block;
+		@media (max-width: 541px) {
+			label[for="sort-by"] {
+				display: none;
+			}
+		}
+	}
+	.product-count-vertical {
+		display: inline-block;
+		margin: 0;
+	}
+}

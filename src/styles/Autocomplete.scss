@@ -1,0 +1,73 @@
+.ss__autocomplete--target {
+	position: absolute;
+	top: 56px;
+	left: 0;
+	right: -40px;
+	z-index: 100;
+	@media (min-width: 768px) {
+		right: 0;
+	}
+	@media (min-width: 990px) {
+		right: -150px;
+		top: 66px;
+	}
+	.ss__autocomplete {
+		border: none;
+		&,
+		& a {
+			color: #121212;
+		}
+		.ss__results {
+			gap: 10px;
+			.ss__result {
+				.ss__result__image-wrapper {
+					flex: 0 1 auto;
+				}
+				.ss__image {
+					img {
+						height: 100%;
+						object-fit: cover;
+						object-position: center center;
+						width: 100%;
+						aspect-ratio: 1;
+					}
+				}
+				.ss__result__details {
+					position: relative;
+					padding: 10px 10px 16px 0;
+					text-align: left;
+				}
+				.card__information {
+					padding: 0;
+				}
+				.card__heading a:after {
+					content: none;
+				}
+			}
+		}
+		.ss__autocomplete__terms {
+			max-width: 160px;
+			a {
+				text-decoration: none;
+			}
+			.ss__autocomplete__terms__option a {
+				line-height: 20px;
+			}
+		}
+		.ss__autocomplete__facets {
+			flex: 0 0 160px;
+			.ss__facet__header {
+				border-bottom: 1px solid #1212121a;
+				font-size: 14px;
+			}
+			.ss__facet-list-options__option {
+				color: #121212BF;
+				font-size: 14px;
+				padding: 0;
+				&.ss__facet-list-options__option--filtered {
+					color: #121212;
+				}
+			}
+		}
+	}
+}

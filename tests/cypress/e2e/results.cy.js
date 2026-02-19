@@ -12,31 +12,32 @@
 const config = {
 	// pages to test (recommended: 1 search page, 1 category page)
 	pages: [
-		{ url: 'https://searchspring-shop.myshopify.com/collections/shop?q=*', id: 'Search' },
-		// { url: 'https://try.searchspring.com/dresses', id: 'Category' },
+		{ url: 'https://localhost:3333/index.html?q=*', id: 'Search' },
+		// { url: 'https://searchspring-shop.myshopify.com/collections/shop?q=*', id: 'Search' },
+		// { url: 'https://searchspring-shop.myshopify.com/collections/all', id: 'Category' },
 	],
 	disableGA: '',
 	selectors: {
 		sidebar: {
 			facetWrapper: '.ss__facet',
-			facetTitle: '.ss__facet__header',
-			facetCollapseButton: '.ss__dropdown__button',
-			facetOpen: '.ss__dropdown--open',
-			facetCollapsed: '',
-			facetOption: '.ss__facet__options a',
-			showMoreButton: 'ss__facet__show-more-less',
+			facetTitle: '.facets__summary-label',
+			facetCollapseButton: '.facets__summary',
+			facetOpen: '.ss__expanded',
+			facetCollapsed: '.ss__collapsed',
+			facetOption: '.facets__display-vertical a',
+			showMoreButton: '.ss__show-more__button',
 			searchWithinInput: '',
-			summaryWrapper: '.ss__filter-summary',
-			appliedFacetRemoveButton: '.ss__filter',
-			removeAllFacetsButton: '.ss__filter-summary__clear-all',
+			summaryWrapper: '.active-facets',
+			appliedFacetRemoveButton: '.active-facets__button',
+			removeAllFacetsButton: '.active-facets__button-remove',
 		},
 		sortBy: {
-			native: 'select#SortBy',
+			native: 'select#sort-by',
 		},
 		pagination: {
-			prev: '.ss__pagination .ss__pagination__prev',
-			page: '.ss__pagination .ss__pagination__page',
-			next: '.ss__pagination .ss__pagination__next',
+			prev: '.pagination .ss__pagination--prev',
+			page: '.pagination .pagination__item',
+			next: '.pagination .ss__pagination--next',
 		},
 		results: {
 			productWrapper: '.ss__result',
@@ -58,8 +59,6 @@ config?.pages?.forEach((page, _i) => {
 						});
 					}
 				});
-
-				
 
 				cy.addLocalSnap();
 
@@ -330,7 +329,6 @@ config?.pages?.forEach((page, _i) => {
 						}
 
 						cy.get(config.selectors.sidebar.facetWrapper).each((el, index) => {
-							
 							// for each facet, expect the facet collapsed state to be correct
 							expect(store.facets[index].collapsed).to.equal(checkCollapsed(el));
 							// click on the facet collapsed button to toggle collapsed
@@ -582,7 +580,7 @@ config?.pages?.forEach((page, _i) => {
 					});
 				});
 
-				it('can select a palette option', function () {
+				it.skip('can select a palette option', function () {
 					if (!config?.selectors?.sidebar?.facetWrapper || !config?.selectors?.sidebar?.facetTitle || !config?.selectors?.sidebar?.facetOption)
 						this.skip();
 

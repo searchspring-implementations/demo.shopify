@@ -1,8 +1,15 @@
+/* external imports */
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Icon, Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact-components';
+/* searchspring imports */
+import { ControllerProvider, ThemeProvider, Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact-components';
+
+/* local imports */
 import { ResultDetails } from './Results';
+import { theme } from '../theme';
+import '../styles/Autocomplete.scss';
+import '../styles/Results.scss';
 
 export const Autocomplete = observer(({ controller, input }) => {
 	const breakpoints = {
@@ -12,22 +19,23 @@ export const Autocomplete = observer(({ controller, input }) => {
 			hideFacets: true,
 			vertical: true,
 		},
-		540: {
+		541: {
 			columns: 3,
 			rows: 1,
+			hideFacets: true,
 			vertical: true,
 		},
-		768: {
+		750: {
 			columns: 2,
 			rows: 2,
 		},
-		991: {
+		990: {
 			columns: 3,
 			rows: 3,
 		},
 	};
 
-	const theme = {
+	const acTheme = {
 		components: {
 			result: {
 				hidePricing: true,
@@ -37,24 +45,19 @@ export const Autocomplete = observer(({ controller, input }) => {
 		},
 	};
 
-	const inputText = controller.store.state.input;
-
-	const reset = () => {
-		controller.reset && controller.reset();
-		const inputElement = typeof input == 'string' ? window.document.querySelector(input) : input;
-		if (inputElement) {
-			inputElement.focus();
-		}
+	const acProps = {
+		controller: controller,
+		input: input,
+		hideBanners: false,
+		breakpoints: breakpoints,
+		theme: acTheme,
 	};
 
 	return (
-		<>
-			{inputText && (
-				<span class="ss__autocomplete-close" onClick={reset}>
-					<Icon icon="close-thin" size="8px" />
-				</span>
-			)}
-			<LibraryAutocomplete input={input} controller={controller} breakpoints={breakpoints} theme={theme} />
-		</>
+		<ThemeProvider theme={theme}>
+			<ControllerProvider controller={controller}>
+				<LibraryAutocomplete {...acProps} />
+			</ControllerProvider>
+		</ThemeProvider>
 	);
 });

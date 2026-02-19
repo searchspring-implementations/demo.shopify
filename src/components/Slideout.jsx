@@ -1,12 +1,18 @@
+/* external imports */
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
-import classnames from 'classnames';
 
-import { withController, Facets, Icon, useMediaQuery, Button, Slideout as LibrarySlideout } from '@searchspring/snap-preact-components';
+/* searchspring imports */
+import { withController, Icon, Button, Slideout as LibrarySlideout } from '@searchspring/snap-preact-components';
+
+/* local imports */
+import { CustomFacets } from './Facets';
+import { theme } from '../theme';
+import '../styles/Slideout.scss';
 
 const buttonStyle = {
-	color: '#403b37',
-	borderColor: '#e3e2e1',
+	color: '#121212',
+	borderColor: '#1212121a',
 	width: '100%',
 	display: 'flex',
 	alignItems: 'center',
@@ -15,53 +21,116 @@ const buttonStyle = {
 
 export const Slideout = withController(
 	observer(({ controller }) => {
-		const { pagination, facets, custom } = controller.store;
+		const { pagination, facets } = controller.store;
+
+		const slideoutProps = {
+			noButtonWrapper: true,
+			buttonContent: <OpenSlideoutButton />,
+			displayAt: `(max-width: ${theme.breakpoints.bp02}px)`,
+			width: '320px',
+			style: {
+				padding: '0',
+			},
+		};
 
 		return (
 			facets.length > 0 &&
 			pagination.totalResults > 0 && (
-				<LibrarySlideout style={{ padding: 0 }} displayAt={custom.respondAt} buttonContent={<OpenButton />}>
-					<SlideoutContents />
+				<LibrarySlideout {...slideoutProps}>
+					<SlideoutContent />
 				</LibrarySlideout>
 			)
 		);
 	})
 );
 
-const SlideoutContents = withController((props) => {
+const OpenSlideoutButton = (props) => {
+	const { toggleActive } = props;
+
 	return (
-		<>
-			<CloseButton toggleActive={props.toggleActive} />
-			<Facets facets={props.controller.store.facets} />
-		</>
+		<Button
+			onClick={toggleActive}
+			style={{
+				...buttonStyle,
+				margin: '20px 0',
+			}}
+		>
+			<Icon icon="filter" />
+			Filters
+			<span />
+		</Button>
+	);
+};
+
+const SlideoutContent = withController((props) => {
+	const { toggleActive } = props;
+
+	return (
+		<div className="ss__slideout__content">
+			<SlideoutHeader toggleActive={toggleActive} />
+			<CustomFacets />
+			<SlideoutFooter toggleActive={toggleActive} />
+		</div>
 	);
 });
 
-const OpenButton = () => {
+export const SlideoutHeader = (props) => {
+	const { toggleActive } = props;
+
 	return (
-		<Button style={buttonStyle}>
-			<Icon color="#403b37" icon="filter" />
-			Filter Options
-			<span></span>
-		</Button>
+		<div className="ss__slideout__header">
+			<Button
+				onClick={toggleActive}
+				style={{
+					...buttonStyle,
+					color: '#fff',
+					backgroundColor: '#121212',
+					border: 0,
+					fontSize: '24px',
+					padding: '10px 20px',
+					textTransform: 'uppercase',
+				}}
+			>
+				Filters
+				<Icon color="#fff" icon="close-thin" />
+			</Button>
+		</div>
 	);
 };
 
-const CloseButton = (props) => {
-	return (
-		<Button
-			onClick={props.toggleActive}
-			style={{
-				...buttonStyle,
-				color: '#fff',
-				backgroundColor: '#403b36',
-				border: 0,
-				fontSize: '20px',
-				textTransform: 'uppercase',
-			}}
-		>
-			Filter Options
-			<Icon color="#fff" icon="close-thin" />
-		</Button>
-	);
-};
+export const SlideoutFooter = withController(
+	observer((props) => {
+		const { controller, toggleActive } = props;
+		const store = controller.store;
+		const { filters } = store;
+		const clearAll = controller.urlManager.remove('filter').remove('sort').remove('pageSize').remove('page').remove('rq');
+
+		const footerButtonStyles = {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			color: '#fff',
+			backgroundColor: '#121212',
+			border: 0,
+			fontSize: '14px',
+			textTransform: 'uppercase',
+			margin: '0 10px',
+			padding: '10px 20px',
+			width: '100%',
+		};
+
+		return (
+			<div className="ss__slideout__footer">
+				<Button onClick={toggleActive} disableStyles={true} style={footerButtonStyles}>
+					Close
+				</Button>
+
+				{filters?.length > 0 ? (
+					<Button onClick={(e) => clearAll.link.onClick(e)} disableStyles={true} style={footerButtonStyles}>
+						Clear all
+					</Button>
+				) : null}
+			</div>
+		);
+	})
+);
