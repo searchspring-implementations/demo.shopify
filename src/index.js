@@ -111,11 +111,7 @@ const config = {
 			siteId: site.id,
 		},
 	},
-	features: {
-		integratedSpellCorrection: {
-			enabled: true,
-		},
-	},
+	features: site.features,
 	instantiators: {
 		recommendation: {
 			components: {
