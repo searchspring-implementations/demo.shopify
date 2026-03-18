@@ -246,7 +246,7 @@ describe('Tracking', () => {
 		const firstResult = cy.get(`${config.selectors.autocomplete.result}[href], ${config.selectors.autocomplete.result} a[href]`)
 			.first()
 			.should('exist')
-			.scrollIntoView();
+			// .scrollIntoView();
 
 		// impression tracking
 		cy.wait(`@beacon2/autocomplete/impression`).then((impression) => {
