@@ -1,6 +1,8 @@
+/* external imports */
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 
+/* searchspring imports */
 import { withController } from '@searchspring/snap-preact-components';
 
 export const FilterMessages = withController(
@@ -22,9 +24,9 @@ export const FilterMessages = withController(
 
 		return (
 			facets.length === 0 && (
-				<div class="ss__filter-messages">
+				<div className="ss__filter-messages">
 					{message && (
-						<p class="ss__filter-messages__content" style="margin-top: 0;">
+						<p className="ss__filter-messages__content" style="margin-top: 0;">
 							{message}
 						</p>
 					)}

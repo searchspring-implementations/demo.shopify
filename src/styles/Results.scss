@@ -1,0 +1,36 @@
+.ss__results {
+	.ss__result {
+		.ss__image {
+			height: 100%;
+		}
+		.card__content {
+			position: relative;
+		}
+		.ss__overlay-badge {
+			.ss__overlay-badge__grid-wrapper {
+				padding: 8px;
+			}
+		}
+		.ss__callout-badge {
+			position: absolute;
+			top: -32px;
+			left: 0;
+			right: 0;
+			opacity: 0.8;
+		}
+		.ss__badge-rectangle {
+			line-height: 10px;
+			height: 24px;
+			.ss__badge-rectangle__value {
+				font-size: 12px;
+			}
+		}
+		.ss__badge-pill {
+			line-height: 10px;
+			height: 24px;
+			.ss__badge-pill__value {
+				font-size: 12px;
+			}
+		}
+	}
+}

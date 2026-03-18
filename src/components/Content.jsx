@@ -1,65 +1,37 @@
+/* external imports */
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Banner, Facets, FilterSummary, useMediaQuery, ControllerProvider, ThemeProvider } from '@searchspring/snap-preact-components';
+/* searchspring imports */
+import { Banner, useMediaQuery, ControllerProvider, ThemeProvider } from '@searchspring/snap-preact-components';
 
+/* local imports */
 import { Results, NoResults } from './Results';
+import { Toolbar } from './Toolbar';
 import { Pagination } from './Pagination';
-import { SortBy } from './SortBy';
 import { theme } from '../theme';
 
 export const Content = observer(({ controller }) => {
-	const {
-		store,
-		store: { facets, filters, pagination, merchandising, custom },
-	} = controller;
-
-	const isMobile = custom.respondAt && useMediaQuery(custom.respondAt);
+	const { merchandising, pagination } = controller.store;
+	const isDesktop = useMediaQuery(`(min-width: ${theme.breakpoints.bp02}px)`);
 
 	return (
 		controller.store.loaded && (
 			<ThemeProvider theme={theme}>
 				<ControllerProvider controller={controller}>
-					<div class="ss__wrapper">
-						{!isMobile && facets.length > 0 && (
-							<div class="ss__sidebar">
-								<FilterSummary
-									filters={filters}
-									onClearAllClick={() => {
-										controller.urlManager.remove('filter').go();
-									}}
-								/>
-								<Facets facets={facets} />
-							</div>
+					<div className="collection">
+						<Banner content={merchandising.content} type="header" />
+						<Banner content={merchandising.content} type="banner" />
+
+						{pagination.totalResults > 0 ? (
+							<>
+								<Toolbar isDesktop={isDesktop} />
+								<Results isDesktop={isDesktop} />
+								<Pagination />
+							</>
+						) : (
+							<NoResults />
 						)}
-
-						<div class="ss__contents">
-							<Banner content={merchandising.content} type="header" />
-							<Banner content={merchandising.content} type="banner" />
-
-							{pagination.totalResults ? (
-								<div>
-									<div class="ss__search-header">
-										<h5>
-											{pagination.multiplePages && (
-												<span class="ss__search-header__count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>
-											)}
-											<span class="ss__search-header__count-total">{pagination.totalResults}</span>
-											{` result${pagination.totalResults == 1 ? '' : 's'}`}
-										</h5>
-
-										<SortBy controller={controller} />
-									</div>
-
-									<Results results={store.results}></Results>
-
-									<hr class="hr--clear" />
-									<Pagination pagination={store.pagination} />
-								</div>
-							) : (
-								pagination.totalResults === 0 && <NoResults />
-							)}
-						</div>
 
 						<Banner content={merchandising.content} type="footer" />
 					</div>

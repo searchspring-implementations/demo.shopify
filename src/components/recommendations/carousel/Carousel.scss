@@ -1,0 +1,12 @@
+.ss__recommendation--carousel {
+	max-width: 1200px;
+	margin: 0 auto 5rem auto;
+	.title {
+		padding: 0 36px;
+	}
+	.ss__recommendation {
+		.ss__carousel__prev, .ss__carousel__next {
+			padding: 10px;
+		}
+	}
+}

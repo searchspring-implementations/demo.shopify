@@ -1,0 +1,22 @@
+{
+	"type": "snap/recommendation/standard",
+	"name": "carousel",
+	"label": "Carousel",
+	"description": "Carousel recommendations template",
+	"component": "Carousel",
+	"orientation": "horizontal",
+	"parameters": [
+		{
+			"name": "title",
+			"label": "Title",
+			"description": "Title for recommendations carousel",
+			"defaultValue": "Recommended Products"
+		},
+		{
+			"name": "perView",
+			"label": "Slides Per View",
+			"description": "Number of recommendations seen in desktop view",
+			"defaultValue": "4"
+		}
+	]
+}

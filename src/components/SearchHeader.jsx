@@ -1,41 +1,40 @@
+/* external imports */
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
 export const SearchHeader = observer(({ controller }) => {
-	const {
-		store,
-		store: { pagination, search },
-	} = controller;
-	const originalQuery = search.originalQuery;
+	const { pagination, search, loaded } = controller.store;
+	const { originalQuery } = search;
 
 	return (
-		store.loaded && (
+		loaded && (
 			<>
-				{pagination.totalResults ? (
-					<>
-						{'Search'}
-						{search?.query && (
-							<span>
-								{` for `}
-								<span class="ss__search-header__query">"{search.query.string}"</span>
-							</span>
-						)}
-					</>
+				{pagination.totalResults > 0 ? (
+					<h1 className="ss__search-header collection-hero__title">
+						<span>
+							{'Search results'}
+							{search?.query && (
+								<>
+									{` for `}
+									<span className="ss__query">"{search.query.string}"</span>
+								</>
+							)}
+						</span>
+					</h1>
 				) : (
-					<>
-						{pagination.totalResults === 0 &&
-							(search?.query ? (
-								<span>
-									No results for <span class="ss__search-header__query">"{search.query.string}"</span> found.
-								</span>
-							) : (
-								<span>No results found.</span>
-							))}
-					</>
+					<h1 className="ss__search-header collection-hero__title">
+						{search?.query ? (
+							<span>
+								No results for <span className="ss__query">"{search.query.string}"</span> found
+							</span>
+						) : (
+							<span>No results found</span>
+						)}
+					</h1>
 				)}
 
 				{originalQuery && (
-					<span class="ss__oq">
+					<span className="ss__oq collection-hero__description rte">
 						Search instead for "<a href={originalQuery.url.href}>{originalQuery.string}</a>"
 					</span>
 				)}

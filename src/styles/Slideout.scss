@@ -1,0 +1,33 @@
+.ss__slideout__button {
+	margin-top: 20px;
+}
+
+.ss__slideout {
+	padding-bottom: 100px;
+	.ss__slideout__content {}
+	.ss__facets {
+		.ss__facet {
+			border-top: 1px solid #1212121a;
+			.facets__summary {
+				margin: 0;
+				padding: 15px 20px;
+				.icon-caret {
+					right: 20px;
+				}
+			}
+			.parent-display {
+				padding: 0 20px 20px 20px;
+			}
+		}
+	}
+	.ss__slideout__footer {
+		display: flex;
+		flex-flow: row nowrap;
+		position: fixed;
+		bottom: 0;
+		background-color: #fff;
+		width: 90%;
+		max-width: 320px;
+		padding: 20px 10px;
+	}
+}

@@ -1,0 +1,107 @@
+.ss__facets {
+	.ss__facet {
+		.facets__summary {
+			cursor: pointer;
+			position: relative;
+			.icon-caret {
+				position: absolute;
+				height: .6rem;
+				right: 0;
+				top: calc(50% - .2rem);
+			}
+		}
+		&.ss__collapsed {
+			.facets__display-vertical {
+				display: none;
+			}
+		}
+		&.ss__expanded {
+			.facets__summary {
+				.icon-caret {
+					transform: rotate(180deg);
+				}
+			}
+		}
+		.facets-layout {
+			max-height: 230px;
+			.facets__label {
+				color: #121212bf;
+				cursor: pointer;
+				text-decoration: none;
+				&:hover {
+					color: #121212;
+				}
+				&.active {
+					color: #121212;
+					font-weight: 700;
+				}
+			}
+		}
+		.ss__facet-grid-options {
+			&::before {
+				padding-bottom: 67%;
+			}
+			a {
+				color: #121212BF;
+				text-decoration: none;
+				&:hover {
+					color: #121212;
+				}
+				&.ss__facet-grid-options__option--filtered {
+					color: #fff;
+				}
+			}
+		}
+		.ss__facet-palette-options {
+			.ss__facet-palette-options__option {
+				position: relative;
+				.ss__facet-palette-options__option__value {
+					display: none;
+					position: absolute;
+					background-color: #eee;
+					font-size: 14px;
+					color: #121212;
+					padding: 4px 10px;
+					line-height: 16px;
+					border-radius: 20px;
+					z-index: 10;
+				}
+				&:hover {
+					.ss__facet-palette-options__option__value {
+						display: block;
+					}
+				}
+			}
+		}
+		.ss__facet-slider {
+			margin-top: 10px;
+			padding: 8px;
+			.ss__facet-slider__segment {
+				border-radius: 4px;
+			}
+			.ss__facet-slider__handles button .ss__facet-slider__handle {
+				height: 24px;
+				width: 24px;
+				label.ss__facet-slider__handle__label.ss__facet-slider__handle__label--sticky {
+					color: #121212;
+					font-family: Assistant, sans-serif;
+					font-size: 16px;
+					top: -28px;
+				}
+			}
+		}
+		.ss__show-more__button {
+			border: none;
+			background: transparent;
+			cursor: pointer;
+			font-family: Assistant, sans-serif;
+			font-size: 14px;
+			letter-spacing: 0.6px;
+			padding: 8px 0;
+			text-decoration: underline;
+			&:hover {
+				text-decoration-thickness: .2rem;
+			}
+		}
+	}
+}
